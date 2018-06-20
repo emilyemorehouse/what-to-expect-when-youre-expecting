@@ -26,29 +26,6 @@ section.has-light-background h6 {
     width: 80%;
     padding: 10px;
     border: 2px white solid; }
-  .reveal.cuttlesoft .intro__image {
-    width: 200px;
-    position: absolute;
-    left: 40px;
-    border-radius: 50%; }
-  .reveal.cuttlesoft .intro__ul {
-    line-height: 1.8em;
-    list-style: none;
-    margin: 30px 0 0 130px; }
-  .reveal.cuttlesoft .intro__li {
-    padding: 0 0 0 70px; }
-    .reveal.cuttlesoft .intro__li--marker {
-      background: url("../../img/intro/marker.png") no-repeat 0 18px;
-      height: 60px;
-      background-size: auto 60%; }
-    .reveal.cuttlesoft .intro__li--twitter {
-      background: url("../../img/intro/twitter.png") no-repeat 0 26px;
-      height: 60px;
-      background-size: auto 60%; }
-    .reveal.cuttlesoft .intro__li--github {
-      background: url("../../img/intro/github.png") no-repeat 0 27px;
-      height: 60px;
-      background-size: auto 60%; }
   .reveal.cuttlesoft footer {
     position: absolute;
     bottom: 32px;
