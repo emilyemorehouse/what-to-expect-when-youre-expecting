@@ -388,18 +388,17 @@
                         * Generate and compare snapshots to make sure changes from previous runs are intended
                         * Generate code coverage reports
             -->
-            <!-- ANATOMY OF A TEST -->
-            <section data-markdown>
-                <script type="text/template">
-                    ## ANATOMY OF A TEST
-                </script>
-            </section>
-
             <!-- ANATOMY OF A TEST -- INGREDIENTS-->
             <section data-markdown>
                 <script type="text/template">
                     ## ANATOMY OF A TEST
                     ### Ingredients
+
+                    * Test environment <!-- .element: class="fragment" data-fragment-index="1" -->
+                    * Testing structure <!-- .element: class="fragment" data-fragment-index="2" -->
+                    * Assertions <!-- .element: class="fragment" data-fragment-index="3" -->
+                    * Mocks, spies, and stubs <!-- .element: class="fragment" data-fragment-index="4" -->
+                    * Browser or browser-like environment <!-- .element: class="fragment" data-fragment-index="5" -->
 
                     Notes:
 
@@ -417,10 +416,14 @@
                     ## ANATOMY OF A TEST
                     ### Process
 
+                    * Generate, display, and watch test results<!-- .element: class="fragment" data-fragment-index="1" -->
+                    * Compare and check assertions<!-- .element: class="fragment" data-fragment-index="2" -->
+                    * Generate code coverage reports<!-- .element: class="fragment" data-fragment-index="3" -->
+
                     Notes:
 
                     * Generate, display, and watch test results
-                    * Generate and compare snapshots to make sure changes from previous runs are intended
+                    * Compare and check assertions
                     * Generate code coverage reports
                 </script>
             </section>
@@ -459,6 +462,17 @@
             <section data-markdown>
                 <script type="text/template">
                     ## APPROACHES FOR VISUAL REGRESSION TESTING
+
+                    * Snapshots or "Golden Images"<!-- .element: class="fragment" data-fragment-index="1" -->
+                    * An image diff-ing library<!-- .element: class="fragment" data-fragment-index="2" -->
+
+                    Notes: Generally, visual regression tests follow the same patterns as most other testing, they just sprinkle in a few things:
+
+                    * Snapshots or "Golden Images"
+                    * An image diff-ing library
+
+                    You can then generate and compare snapshots to make sure changes from previous runs are intended
+
                 </script>
             </section>
 
@@ -471,7 +485,27 @@
             <!-- VISUAL REGRESSION TESTING IS EASIER IN 2018 -->
             <section data-markdown>
                 <script type="text/template">
-                    ## VISUAL REGRESSION TESTING IS EASIER IN 2018
+                        ## Headless Browsers
+
+                        ![headless-nearlyheadlessnick](img/_gifs/headless-nearlyheadlessnick.gif "Nearly-Headless Nick")
+
+                        Notes:
+
+                        Running visual regression tests relies on having a browser or browser-like environment. Previously, visual regression testing was tied to manipulating an actual browser using tools like Selenium or PhantomJS. Tools like Selenium have been notoriously difficult to work with, especially when trying to introspect or debug issues.
+
+                        [Headless Chrome](https://developers.google.com/web/updates/2017/04/headless-chrome) makes interacting with your browser much easier since you can control test environments without a visible UI
+                        #XXX
+                    </script>
+            </section>
+            <!-- VISUAL REGRESSION TESTING IS EASIER IN 2018 -->
+            <section data-markdown>
+                <script type="text/template">
+                    ### VISUAL REGRESSION TESTING IS EASIER IN 2018
+
+                    ![puppeteer-logo](img/_gifs/puppeteer.png "Puppeteer")
+
+                    Notes:
+                    Puppeteer #XXX
                 </script>
             </section>
 
@@ -485,7 +519,12 @@
             <!-- WALK-THROUGH - TOOLS FOR VISUAL REGRESSION TESTING -->
             <section data-markdown>
                 <script type="text/template">
-                    ## WALK-THROUGH - TOOLS FOR VISUAL REGRESSION TESTING
+                    ## VRT WALK-THROUGH
+                    ### TOOLS OF CHOICE
+
+                    * [Puppeteer](https://github.com/GoogleChrome/puppeteer) - Headless Chrome Node API
+                    * [Resemble.js](https://github.com/Huddle/Resemble.js) - Visual image comparison
+                    * Runner and assertion libraries of choice - we’ll use Jest and Enzyme
                 </script>
             </section>
 
@@ -506,13 +545,7 @@
                             * Screenshot of DinosaurJS site with elements moved: ![screenshot of DinosaurJS site with elements moved](https://s3.amazonaws.com/dinojs/dinosaurjs.org_changed.png)
                             * Image showing diff between screenshots: ![image showing diff between screenshots](https://s3.amazonaws.com/dinojs/dinosaurjs.org_diff.png)
             -->
-            <!-- WALK-THROUGH WITH CODE SNIPPETS -->
-            <section data-markdown>
-                <script type="text/template">
-                    ## WALK-THROUGH WITH CODE SNIPPETS
-                </script>
-            </section>
-
+            <!-- WALK-THROUGH -- INSTALLATION -->
             <section data-markdown>
                 <script type="text/template">
                     ## Install dependencies
@@ -520,10 +553,26 @@
                     ```shell
                     yarn add --dev jest enzyme puppeteer resemblejs
                     ```
+                </script>
+            </section>
+            <!-- WALK-THROUGH -- -->
+            <section data-markdown>
+                <script type="text/template">
+                    #
 
-                    ```shell
-                    yarn add --dev mocha chai puppeteer resemblejs
-                    ```
+                    Notes:
+
+
+                </script>
+            </section>
+            <!-- -->
+            <section data-markdown>
+                <script type="text/template">
+                    #
+
+                    Notes:
+
+
                 </script>
             </section>
 
