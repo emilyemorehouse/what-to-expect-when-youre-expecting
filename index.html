@@ -38,17 +38,28 @@
                         # What To Expect When You're Expecting🤰🏻
                         ### A Guide To Regression Testing
 
-                        Note:
-                        WELCOME WELCOME
+                        Notes:
+                        Alright everyone! Here we are, first talk of DinosaurJS 2018 and we're here to talk about everyone's favorite subject: testing! (hah)
                     </script>
             </section>
 
             <!-- INTRO -- ABOUT - HEADER -->
             <section data-markdown>
                 <script type="text/template">
-                        # WHO AM I?
+                        #### WHO AM I?
+                        ---
+                        # Emily <!-- .element: class="fragment" data-fragment-index="1" -->
+                        ### Director of Engineering @ Cuttlesoft <!-- .element: class="fragment" data-fragment-index="2" -->
+                        ### @emilyemorehouse <!-- .element: class="fragment" data-fragment-index="3" -->
 
-                        Note:
+                        Notes:
+                        A little bit about me first.
+                        My name is Emily Morehouse. I've lived in Denver for a little under 2 years now. I came here by way of Florida where I spent basically the rest before moving to Colorado. So you'd think that the whole "y'all" thing would come easily to me, but it doesn't! So be forgiving.<br>
+
+                        I work for a company called Cuttlesoft - who is a digital product development company where I get to work on anything and everything from
+                        CI/CD pipelines and system architectures to web and mobile development, UX and IOT. So I get a chance to touch on a lot of different parts of software in some really cool ways.
+
+                        I'm also @emilyemorehouse pretty much anywhere that you can find me on the internet. These slides along with any code examples are also all on Github.
                     </script>
             </section>
 
@@ -76,20 +87,6 @@
                     CI/CD pipelines and system architectures to web and mobile development, UX and IOT.
                 </aside>
             </section> -->
-            <section data-markdown>
-                <script type="text/template">
-                    # Emily
-                    ---
-                    ### Director of Engineering @ Cuttlesoft <!-- .element: class="fragment" data-fragment-index="1" -->
-                    ### @emilyemorehouse <!-- .element: class="fragment" data-fragment-index="2" -->
-
-                    Notes:
-                    I'm Emily Morehouse, the director of engineering at Cuttlesoft.
-                    <br>
-                    <br> Cuttlesoft is a digital product development firm where I get to work on anything and everything from
-                    CI/CD pipelines and system architectures to web and mobile development, UX and IOT.
-                </script>
-            </section>
 
             <!-- INTRO -- OVERVIEW -->
             <section data-markdown>
@@ -100,7 +97,15 @@
                     - Anatomy of a Test <!-- .element: class="fragment" data-fragment-index="2" -->
                     - Visual Regression Testing <!-- .element: class="fragment" data-fragment-index="3" -->
                         - Approaches <!-- .element: class="fragment" data-fragment-index="4" -->
-                        - Walkthrough <!-- .element: class="fragment" data-fragment-index="5" -->
+                        - Walk-through <!-- .element: class="fragment" data-fragment-index="5" -->
+
+                    Notes:
+                    So let's start off with a quick overview on what you can expect to get out of this talk.
+
+                    - First we're going to start out with a sort of rapid-fire, 20,000 ft view introduction to testing and different types of testing
+                    - We'll talk about why it's important to have consistent tests and what that actually means
+                    - Then we'll talk about the anatomy of a test -- the different ingredients and processes in which you actually write your tests
+                    - Then we're going to take more of a deep dive into visual regression testing. Why I think visual regression testing is really important and super neat, and some of my favorite tools that you can use to write visual regression tests for your projects.
                 </script>
             </section>
 
@@ -116,11 +121,154 @@
                     # TESTING, WAT?
 
                     Notes:
-                    We all know we should be writing tests for our code, but what does that really mean?
-                    What does writing tests “in the real world” look like?
+                    So testing! I kind of joke about this a lot but it's something that is really important. Good testing is hard and great testing is even harder. And that's because I think that when you approach testing your software, the time that you spend writing your tests is not the time that is most outwardly valuable to your end users. You aren't actually delivering new features to your end users when you're writing tests. But, your tests are there for a reason. I like tests because they help me sleep at night! Your goal of writing a test is to be able to pinpoint the different areas of your application in which your code is breaking, or in other forms of testing to actually write a test after your found a bug so it doesn't happen again. (#XXX Maybe mention TDD?) And so you can deliever and continue delivering a high-quality product that people will enjoy using.
+
+                    <!-- We all know we should be writing tests for our code, but what does that really mean?
+                    What does writing tests “in the real world” look like? -->
                 </script>
             </section>
 
+            <!-- TESTING, WAT -- CATCHING BUGS -->
+            <section data-markdown>
+                <script type="text/template">
+                    ### Tests only catch bugs when…
+
+                    1. You run your tests <!-- .element: class="fragment" data-fragment-index="1" -->
+                    2. You’ve written a test that catches the bug <!-- .element: class="fragment" data-fragment-index="2" -->
+
+                    Notes:
+                    But one of the huge "gotchas" with tests is that tests actually only catch your bugs when 1) you actually run your tests, and 2) when you've successfully written a test that properly catches your bug.
+                </script>
+            </section>
+
+            <!-- TESTING, WAT -- TESTING CRITERIA -->
+            <section data-markdown>
+                <script type="text/template">
+                    ### Tests should be:
+                    - Fast <!-- .element: class="fragment" data-fragment-index="1" -->
+                    - Reliable <!-- .element: class="fragment" data-fragment-index="2" -->
+                    - Modular and Direct <!-- .element: class="fragment" data-fragment-index="3" -->
+
+                    Notes:
+                    So with that in mind, we know that tests need to be fast so that we can run them locally, we can run them often. We can run them across different browsers and platforms and we're not going to take the whole day for our tests to run in the background before we actually get our test results back.
+
+                    Our tests also need to be reliable - we really need to be able to depend on our tests. When they are given the same input, they can produce the same output. A lot of times, this is going to be in regard to temporal bugs that are really hard to reproduce, whether that's from a third-party API that happens to go down but you don't know about it because you haven't written tests or aren't monitoring someone else's API because you don't even have tests for your own API. Or it could be a hardware issue, you could be running your tests on a remote server someplace as part of a Continuous Integration (#XXX or is it CD?) pipeline and for some reason it goes down while you're running your test suite for maintenance or an outage and it winds up failing a bunch of your tests. Anything like that -- you want to make sure that you're tracking and that you can avoid these issues as much as possible so you can be error and fault tolerant and recover from these issues in a timely manner.
+
+                    And thirdly, you want to make sure that are very modular and very direct. So one of the things that many programmers are taught as a good sort of programming paradigm and style is to make sure that your functions are small enough, whatever X number of lines that's you deem as that limit, make sure that your functions are small enough and atomic (#XXX ?) that they are doing one single thing per function so that you can test individual functionality and focus on doing one thing correctly at a time. And so this is really really helpful when it comes to testing because that means that if you write a test and it fails, you can narrow it down to, 10-20 lines in which your test is failing.
+
+                    The things that aren't helpful in testing is when you're testing too much too broadly. So say you're trying to test authentication, say registering a new user for your app, and your test just comes back and fails and says "user registration failed". (pause). Have fun with that. So being able to actually test individual functions and how those functions come together is really, really helpful because you can start from these sort of small building blocks of testing individual functions and then you can test how those functions are integrated together and have a much better time at pinpointing where your errors are actually coming from.
+                </script>
+            </section>
+
+
+            <!-- SOFTWARE CORRECTNESS -- FV -->
+            <section data-markdown>
+                <script type="text/template">
+                    ### Borrowing from Formal Verification
+
+                    ![honey-i-shrunk-the-kids-investigating](img/_gifs/investigate-honeyishrunkthekids.gif "Honey I Shrunk the Kids - Investigating")
+
+                    Notes:
+                    So going off of this, I like to borrow a lot of ideas from formal verification, and I see a lot of parallels between "formal verification" and "software testing" because the ultimate goals of both are to make sure that software is rid of errors and is fault tolerant and stable.
+                </script>
+            </section>
+
+            <!-- SOFTWARE CORRECTNESS -- SCENARIOS -->
+            <section data-markdown>
+                <script type="text/template">
+                    # Software Correctness
+
+                    Notes:
+                    There are two different ways we know software is correct. And I very unabashedly (#XXX ?) pulled this from an excellent Medium post by Andrew Helwer, so these are not my words. So we know that software is correct when:
+                    > The supreme deity of the universe descends from the heavens and decrees, with all the weight of Objective Truth, that a certain piece of software is correct.
+
+                    Or, what happens more frequently is that we have a list of things we want the software to do, and use a certain amount of logic to prove the software does these things.
+                </script>
+            </section>
+
+            <!-- SOFTWARE CORRECTNESS -- OBJECTIVE TRUTHS-->
+            <section data-markdown>
+                <script type="text/template">
+                    # Objective Truth ✨
+
+                    Notes:
+                    Now in the first scenario, as silly as it is, we're talking about objective truths. We're talking about things that are not going to be debated. And also, this sort of all-knowing-powerful knowledge that everything that has been and everything that will be is known by this being, right? And the thing is that that isn't the reality of software testing. Functionality can be subjective, it can be ill-defined, and it certainly can be relative...
+                </script>
+            </section>
+
+            <!-- SOFTWARE CORRECTNESS -- OBJECTIVE TRUTHS - part 2-->
+            <section data-markdown>
+                <script type="text/template">
+                    ![relativism-it-worked-on-my-machine](img/_gifs/relativism-it-worked-on-my-machine.jpg "It Worked On My Machine!")
+                </script>
+            </section>
+
+
+            <!-- SOFTWARE TESTING -- APPROACHES-->
+            <section data-markdown>
+                <script type="text/template">
+                    ### Testing Approaches:
+
+                    * How do I know this is correct? <!-- .element: class="fragment" data-fragment-index="1" -->
+                    * How can I break this? <!-- .element: class="fragment" data-fragment-index="2" -->
+
+                    Notes:
+                    So when you approach testing, it's very common to come at it in either (or both) of these two ways:
+                    1) We can say: "how do I know that this software is correct?"
+                    or: "How can I break this?"
+                    So one way is saying, for example say that I'm writing a function that computes the sum of two integers and returns the calculation (#XXX better word?). And so we know inherently that we already have a set of truths and proof that using our system of mathematics that we can go through and say yes, if the input is one plus one, the output is two. If the input is one plus two, the output is three. If the input is two plus two, the output is four. And we have this sort of rhythm and set knowledge that if we put in these two inputs that we should always get this discrete outcome. We know that it can be applied across the board so if we're throwing at it a positive number, a negative number, an integer, a float, whatever it is, it's already decided for us. There are no real edge cases that haven't already been addressed and incorporated. Especially in addition. Dividing by 0 like, yeah, you should make sure you're looking out for that. But. In a certain sense, there are no edge cases so we can very easily set out a proof and say okay, I can verify that this function and this code is correct.
+
+                    The other more fun way of approaching software is "how can I break this?"
+                    QA Engineers get to be really really great at breaking things.
+
+                    And the problem is that when you have these two things you're approaching the problem from two sides, but you're missing a lot of the middle. That is where testing fails at verifying software most often.
+                </script>
+            </section>
+
+
+            <!--THEORY V REALITY -->
+            <section data-markdown>
+                <script type="text/template">
+                    ### THEORY vs REALITY
+
+                    ![red-pill-blue-pill](img/_gifs/red-pill-blue-pill.gif "Red pill v Blue pill (Matrix)")
+
+                    Notes:
+                    So, we can talk about software testing in theory and in reality.
+                    In theory, you have 100% test coverage and your tests are going to catch every single bug that could possibly exist in your code. The reality is that that's never going to be the case. Even if you have 100% test coverage, that doesn't mean that you're actually testing for the right things in your code.
+
+                    As an engineer, knowing that the number of tests that I write might help me sleep at night is great, but knowing that the less time I spend writing tests, the more time I can spend writing code and delivering features to a user is even better.
+                </script>
+            </section>
+
+            <!--TESTING STRATEGIES -- USER-CENTRIC -->
+            <section data-markdown>
+                <script type="text/template">
+                    ### Testing Strategies:
+
+                    ### User-Centric... Everything
+
+                    Notes:
+                    One of the ways that I've tried to optimize for this, especially working for a company where not all of our clients are going to be able to put in the money to have full and robust test suites, is to take one of the paradigms that is very prevalent in software engineering, and focusing everything around the user.
+
+                    Integration tests are hard. Integration tests are going to make sure that all of the different pieces of your software are working together properly and that nothing's broken. BUT that means that everything needs to have a test, which is not so easy.
+                </script>
+            </section>
+
+            <!--TESTING STRATEGIES -- VRT -->
+            <section data-markdown>
+                <script type="text/template">
+                    ### Testing Strategies:
+
+                    ### Visual Regression Tests
+
+                    Notes:
+                    So the way that I like to approach testing is that the first test that I am wont (#XXX ?) to write is called a visual regression test. Now regression testing, the definition depends on who you ask and how they're going to define it. A lot of times regression testing specifically refers to a bug that is introduced then you write a test that makes sure that that specific bug isn't introduced again. But I like to think of regression testing as a bit more proactive instead of reactive -- so regression tests are written to ensure that existing functionality that you have remains stable even as you're adding new features or refactoring code.
+
+                    When you think about approaching your application from the end user's perspective, you can test how your login page works. In the example of a login page, visually, you can see that when you attempt to login with a correct password and a properly working server and API that you give you back accurate responses and a working frontend that can parse that API response and allow you access into the application when the username and password is correct. It's really easy to see that, when you look at it, visually. And if you have thorough user stories, you can write tests based directly on those user stories.
+                    We know that when the username and password is correct and working properly that the user should be redirected to their homepage. If the user's email or password is incorrect, an error should occur and should be displayed, if your server is down, an error should occur. If any of the pieces are failing, you'll immediately know if by looking at your visual tests. So now the biggest concern is being able to mimic and test different states of your application from a single viewpoint.
+                </script>
+            </section>
 
             <!--
                 * OVERVIEW (3 minutes, 5 total)
@@ -139,7 +287,7 @@
                     * Shout out to accessibility testing - it’s surprisingly easy to do and can point out oversights that are very easy to fix and are very impactful
             -->
             <!-- RAPID-FIRE INTRODUCTION TO TESTING -->
-            <section data-markdown data-transition="none">
+            <!-- <section data-markdown data-transition="none">
                 <script type="text/template">
                     ### Types of Testing
                     #### Unit Testing
@@ -218,7 +366,7 @@
 
                     Notes:
                 </script>
-            </section>
+            </section> -->
 
 
             <!--
@@ -227,19 +375,19 @@
                     * The larger your application gets, the more existing features may (unintentionally) break as you add new code!
             -->
             <!-- THE IMPORTANCE OF CONSISTENT REGRESSION TESTING -- HEADER  -->
-            <section data-markdown>
+            <!-- <section data-markdown>
                 <script type="text/template">
                     ## THE IMPORTANCE OF CONSISTENT REGRESSION TESTING
 
                     Notes:
                     The larger your application gets, the more existing features may (unintentionally) break as you add new code!
                 </script>
-            </section>
+            </section> -->
 
             <!-- THE IMPORTANCE OF CONSISTENT REGRESSION TESTING -- CHANGE BLINDNESS  -->
             <section data-markdown>
                 <script type="text/template">
-                    #   # Change Blindness
+                    # Change Blindness
 
                     Notes:
                     The human brain isn’t good at remembering minute details of stimuli, and therefore it’s much better to let a computer handle detecting changes, both visual and functional
@@ -307,7 +455,7 @@
                         * What was the expected output (expected behavior)?
             -->
             <!-- WHAT SHOULD YOU EXPECT? -->
-            <section data-markdown>
+            <!-- <section data-markdown>
                 <script type="text/template">
                     ## WHAT SHOULD YOU `EXPECT`?
 
@@ -318,7 +466,7 @@
                         * How can I break this?
                     * The problem is that these things are riddled with edge cases.
                 </script>
-            </section>
+            </section> -->
 
 
             <!--
@@ -349,21 +497,21 @@
 
 
             <!--
-                * WALKTHROUGH - TOOLS FOR VISUAL REGRESSION TESTING  (2 minutes, 17 total)
+                * WALK-THROUGH - TOOLS FOR VISUAL REGRESSION TESTING  (2 minutes, 17 total)
                     * [Puppeteer](https://github.com/GoogleChrome/puppeteer) - Headless Chrome Node API
                     * [Resemble.js](https://github.com/Huddle/Resemble.js) - Visual image comparison
                     * Runner and assertion libraries of choice - we’ll use Mocha and Chai
             -->
-            <!-- WALKTHROUGH - TOOLS FOR VISUAL REGRESSION TESTING -->
+            <!-- WALK-THROUGH - TOOLS FOR VISUAL REGRESSION TESTING -->
             <section data-markdown>
                 <script type="text/template">
-                    ## WALKTHROUGH - TOOLS FOR VISUAL REGRESSION TESTING
+                    ## WALK-THROUGH - TOOLS FOR VISUAL REGRESSION TESTING
                 </script>
             </section>
 
 
             <!--
-                * WALKTHROUGH WITH CODE SNIPPETS (this will have a companion repo on GitHub)  (8 minutes, 25 total)
+                * WALK-THROUGH WITH CODE SNIPPETS (this will have a companion repo on GitHub)  (8 minutes, 25 total)
                     * Set up your test environment:
                         * `before` - start your local server, make sure your directories to store screenshots exists
                         * `after` - stop your server
@@ -378,10 +526,24 @@
                             * Screenshot of DinosaurJS site with elements moved: ![screenshot of DinosaurJS site with elements moved](https://s3.amazonaws.com/dinojs/dinosaurjs.org_changed.png)
                             * Image showing diff between screenshots: ![image showing diff between screenshots](https://s3.amazonaws.com/dinojs/dinosaurjs.org_diff.png)
             -->
-            <!-- WALKTHROUGH WITH CODE SNIPPETS -->
+            <!-- WALK-THROUGH WITH CODE SNIPPETS -->
             <section data-markdown>
                 <script type="text/template">
-                    ## WALKTHROUGH WITH CODE SNIPPETS
+                    ## WALK-THROUGH WITH CODE SNIPPETS
+                </script>
+            </section>
+
+            <section data-markdown>
+                <script type="text/template">
+                    ## Install dependencies
+
+                    ```shell
+                    yarn add --dev jest enzyme puppeteer resemblejs
+                    ```
+
+                    ```shell
+                    yarn add --dev mocha chai puppeteer resemblejs
+                    ```
                 </script>
             </section>
 
