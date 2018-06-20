@@ -90,7 +90,317 @@
                     CI/CD pipelines and system architectures to web and mobile development, UX and IOT.
                 </script>
             </section>
+
+            <!-- INTRO -- OVERVIEW -->
+            <section data-markdown>
+                <script type="text/template">
+                    ### Overview
+                    - Rapid-Fire Introduction to Testing
+                    - Importance of Consistent Testing <!-- .element: class="fragment" data-fragment-index="1" -->
+                    - Anatomy of a Test <!-- .element: class="fragment" data-fragment-index="2" -->
+                    - Visual Regression Testing <!-- .element: class="fragment" data-fragment-index="3" -->
+                        - Approaches <!-- .element: class="fragment" data-fragment-index="4" -->
+                        - Walkthrough <!-- .element: class="fragment" data-fragment-index="5" -->
+                </script>
+            </section>
+
+
+            <!--
+                * TESTING, WAT? (1 minute, 2 total)
+                    * We all know we should be writing tests for our code, but what does that really mean?
+                    * What does writing tests “in the real world” look like?
+            -->
+            <!-- TESTING, WAT -- HEADER -->
+            <section data-markdown>
+                <script type="text/template">
+                    # TESTING, WAT?
+
+                    Notes:
+                    We all know we should be writing tests for our code, but what does that really mean?
+                    What does writing tests “in the real world” look like?
+                </script>
+            </section>
+
+
+            <!--
+                * OVERVIEW (3 minutes, 5 total)
+                    * Rapid-Fire Introduction to Testing - 20,000 foot view, short descriptions of different types of testing
+                        * Unit Testing
+                        * Integration Testing
+                        * Regression Testing
+                        * Functional Testing
+                        * System Testing
+                        * Performance Testing
+                        * Usability Testing
+                        * Accessibility Testing
+                        * Chaos Testing
+                        * Stress Testing
+                    * What kinds of tests are most impactful for different use cases?
+                    * Shout out to accessibility testing - it’s surprisingly easy to do and can point out oversights that are very easy to fix and are very impactful
+            -->
+            <!-- RAPID-FIRE INTRODUCTION TO TESTING -->
+            <section data-markdown data-transition="none">
+                <script type="text/template">
+                    ### Types of Testing
+                    #### Unit Testing
+
+                    Notes:
+                </script>
+            </section>
+            <section data-markdown data-transition="none">
+                <script type="text/template">
+                    ### Types of Testing
+                    #### Integration Testing
+
+                    Notes:
+                </script>
+            </section>
+            <section data-markdown data-transition="none">
+                <script type="text/template">
+                    ### Types of Testing
+                    #### Regression Testing
+
+                    Notes:
+                </script>
+            </section>
+            <section data-markdown data-transition="none">
+                <script type="text/template">
+                    ### Types of Testing
+                    #### Functional Testing
+
+                    Notes:
+                </script>
+            </section>
+            <section data-markdown data-transition="none">
+                <script type="text/template">
+                    ### Types of Testing
+                    #### System Testing
+
+                    Notes:
+                </script>
+            </section>
+            <section data-markdown data-transition="none">
+                <script type="text/template">
+                    ### Types of Testing
+                    #### Performance Testing
+
+                    Notes:
+                </script>
+            </section>
+            <section data-markdown data-transition="none">
+                <script type="text/template">
+                    ### Types of Testing
+                    #### Usability Testing
+
+                    Notes:
+                </script>
+            </section>
+            <section data-markdown data-transition="none">
+                <script type="text/template">
+                    ### Types of Testing
+                    #### Accessibility Testing
+
+                    Notes:
+                </script>
+            </section>
+            <section data-markdown data-transition="none">
+                <script type="text/template">
+                    ### Types of Testing
+                    #### Chaos Testing
+
+                    Notes:
+                </script>
+            </section>
+            <section data-markdown data-transition="none">
+                <script type="text/template">
+                    ### Types of Testing
+                    #### Stress Testing
+
+                    Notes:
+                </script>
+            </section>
+
+
+            <!--
+                * THE IMPORTANCE OF CONSISTENT REGRESSION TESTING (1 minutes, 6 total)
+                    * [Change blindness](http://enacademic.com/dic.nsf/enwiki/1159161) - the human brain isn’t good at remembering minute details of stimuli, and therefore it’s much better to let a computer handle detecting changes, both visual and functional
+                    * The larger your application gets, the more existing features may (unintentionally) break as you add new code!
+            -->
+            <!-- THE IMPORTANCE OF CONSISTENT REGRESSION TESTING -- HEADER  -->
+            <section data-markdown>
+                <script type="text/template">
+                    ## THE IMPORTANCE OF CONSISTENT REGRESSION TESTING
+
+                    Notes:
+                    The larger your application gets, the more existing features may (unintentionally) break as you add new code!
+                </script>
+            </section>
+
+            <!-- THE IMPORTANCE OF CONSISTENT REGRESSION TESTING -- CHANGE BLINDNESS  -->
+            <section data-markdown>
+                <script type="text/template">
+                    #   # Change Blindness
+
+                    Notes:
+                    The human brain isn’t good at remembering minute details of stimuli, and therefore it’s much better to let a computer handle detecting changes, both visual and functional
+                </script>
+            </section>
+
+
+            <!--
+                * ANATOMY OF A TEST (3 minutes, 9 total)
+                    * Ingredients:
+                        * Test environment (e.g., Mocha, Jasmine, Jest, Karma)
+                        * Testing structure (e.g., Mocha, Jasmine, Jest, Cucumber)
+                        * Assertions (e.g., Chai, Jasmine, Jest, Unexpected)
+                        * Mocks, spies, and stubs (e.g., Sinon, Jasmine, enzyme, Jest, testdouble)
+                        * Browser or browser-like environment (e.g., Protractor, Nightwatch, Phantom, Casper)
+                    * Process:
+                        * Generate, display, and watch test results
+                        * Generate and compare snapshots to make sure changes from previous runs are intended
+                        * Generate code coverage reports
+            -->
+            <!-- ANATOMY OF A TEST -->
+            <section data-markdown>
+                <script type="text/template">
+                    ## ANATOMY OF A TEST
+                </script>
+            </section>
+
+            <!-- ANATOMY OF A TEST -- INGREDIENTS-->
+            <section data-markdown>
+                <script type="text/template">
+                    ## ANATOMY OF A TEST
+                    ### Ingredients
+
+                    Notes:
+
+                    * Test environment (e.g., Mocha, Jasmine, Jest, Karma)
+                    * Testing structure (e.g., Mocha, Jasmine, Jest, Cucumber)
+                    * Assertions (e.g., Chai, Jasmine, Jest, Unexpected)
+                    * Mocks, spies, and stubs (e.g., Sinon, Jasmine, enzyme, Jest, testdouble)
+                    * Browser or browser-like environment (e.g., Protractor, Nightwatch, Phantom, Casper)
+                </script>
+            </section>
+
+            <!-- ANATOMY OF A TEST -- PROCESS-->
+            <section data-markdown>
+                <script type="text/template">
+                    ## ANATOMY OF A TEST
+                    ### Process
+
+                    Notes:
+
+                    * Generate, display, and watch test results
+                    * Generate and compare snapshots to make sure changes from previous runs are intended
+                    * Generate code coverage reports
+                </script>
+            </section>
+
+
+            <!--
+                * WHAT SHOULD YOU EXPECT? (3 minutes, 12 total)
+                    * Good tests mimic good bug reports:
+                        * What were you testing?
+                        * What should it do?
+                        * What was the output (actual behavior)?
+                        * What was the expected output (expected behavior)?
+            -->
+            <!-- WHAT SHOULD YOU EXPECT? -->
+            <section data-markdown>
+                <script type="text/template">
+                    ## WHAT SHOULD YOU `EXPECT`?
+
+                    Notes:
+
+                    * When approaching testing, it’s common to come at it from either (or both) of these two ways:
+                        * How do I know this is correct?
+                        * How can I break this?
+                    * The problem is that these things are riddled with edge cases.
+                </script>
+            </section>
+
+
+            <!--
+                * APPROACHES FOR VISUAL REGRESSION TESTING (2 minutes, 14 total)
+                    * Developers maintain a set of “golden” images, whether screenshots or mocks, that represent what the application *should* look like
+                    * Tests are run that take screenshots of the current application and compare them against the “golden” set
+                    * Results can be received as either discrete pixel amounts or an overlay of screenshots with highlighted areas where they differ
+            -->
+            <!-- APPROACHES FOR VISUAL REGRESSION TESTING -->
+            <section data-markdown>
+                <script type="text/template">
+                    ## APPROACHES FOR VISUAL REGRESSION TESTING
+                </script>
+            </section>
+
+
+            <!--
+                * VISUAL REGRESSION TESTING IS EASIER IN 2018 (1 minute, 15 total)
+                    * Previously, visual regression testing was tied to manipulating an actual browser using tools like Selenium or PhantomJS
+                    * [Headless Chrome](https://developers.google.com/web/updates/2017/04/headless-chrome) makes interacting with your browser much easier since you can control test environments without a visible UI
+            -->
+            <!-- VISUAL REGRESSION TESTING IS EASIER IN 2018 -->
+            <section data-markdown>
+                <script type="text/template">
+                    ## VISUAL REGRESSION TESTING IS EASIER IN 2018
+                </script>
+            </section>
+
+
+            <!--
+                * WALKTHROUGH - TOOLS FOR VISUAL REGRESSION TESTING  (2 minutes, 17 total)
+                    * [Puppeteer](https://github.com/GoogleChrome/puppeteer) - Headless Chrome Node API
+                    * [Resemble.js](https://github.com/Huddle/Resemble.js) - Visual image comparison
+                    * Runner and assertion libraries of choice - we’ll use Mocha and Chai
+            -->
+            <!-- WALKTHROUGH - TOOLS FOR VISUAL REGRESSION TESTING -->
+            <section data-markdown>
+                <script type="text/template">
+                    ## WALKTHROUGH - TOOLS FOR VISUAL REGRESSION TESTING
+                </script>
+            </section>
+
+
+            <!--
+                * WALKTHROUGH WITH CODE SNIPPETS (this will have a companion repo on GitHub)  (8 minutes, 25 total)
+                    * Set up your test environment:
+                        * `before` - start your local server, make sure your directories to store screenshots exists
+                        * `after` - stop your server
+                        * `afterEach` - reload your Puppeteer browser
+                    * Set up a test:
+                        * Load the Puppeteer browser
+                        * Set your viewport size, or emulate a specific device
+                        * Take the screenshot
+                        * Compare your screenshot with the expected view
+                    * Example (I would include this as a demo, but this is cool to see the output that you get when your site changes):
+                        * Original screenshot of DinosaurJS site: ![original screenshot of DinosaurJS site](https://s3.amazonaws.com/dinojs/dinosaurjs.org_original.png)
+                            * Screenshot of DinosaurJS site with elements moved: ![screenshot of DinosaurJS site with elements moved](https://s3.amazonaws.com/dinojs/dinosaurjs.org_changed.png)
+                            * Image showing diff between screenshots: ![image showing diff between screenshots](https://s3.amazonaws.com/dinojs/dinosaurjs.org_diff.png)
+            -->
+            <!-- WALKTHROUGH WITH CODE SNIPPETS -->
+            <section data-markdown>
+                <script type="text/template">
+                    ## WALKTHROUGH WITH CODE SNIPPETS
+                </script>
+            </section>
+
+
+            <!--
+                * CONCLUSION (1 minute, 26 total)
+                    * Wrap up and call to action
+            -->
+            <!-- CONCLUSION -->
+            <section data-markdown>
+                <script type="text/template">
+                    ## CONCLUSION
+                </script>
+            </section>
         </div>
+
+        <footer>
+            What To Expect When You're Expecting // @emilyemorehouse
+        </footer>
     </div>
 
     <script src="lib/js/head.min.js"></script>
