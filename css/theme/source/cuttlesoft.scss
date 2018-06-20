@@ -1,0 +1,128 @@
+/**
+ * Black theme for reveal.js. This is the opposite of the 'white' theme.
+ *
+ * By Hakim El Hattab, http://hakim.se
+ */
+
+// ---------------------------------------------
+// Default mixins and settings -----------------
+@import "../template/mixins";
+@import "../template/settings"; // also has mixins we need
+// Include theme-specific fonts ----------------
+@import url(../../lib/font/source-sans-pro/source-sans-pro.css);
+
+// Cuttlesoft Palette
+$turbo: rgb(242, 233, 0); // Turbo
+$buttercup: rgb(245, 186, 23); // Buttercup
+$crimson: rgb(230, 34, 45); // Crimson
+$magenta: rgb(221, 17, 117); // Magenta
+$mod-blue: rgb(65, 86, 166); // Mod Blue
+$cuttle-blue: rgb(24, 192, 221); // Cuttle Blue
+$dark-grey: rgb(68, 68, 68); // Dark Grey
+$medium-grey: rgb(170, 170, 170); // Medium Grey
+$light-grey: rgb(238, 238, 238); // Light Grey
+
+// Override theme settings (see ../template/settings.scss)
+$backgroundColor: #222;
+
+$mainColor: #fff;
+$headingColor: #fff;
+
+$mainFontSize: 50px;
+$mainFont: "Source Sans Pro", Helvetica, sans-serif;
+$headingFont: "Source Sans Pro", Helvetica, sans-serif;
+$headingTextShadow: none;
+$headingLetterSpacing: normal;
+$headingTextTransform: uppercase;
+$headingFontWeight: 600;
+$linkColor: $cuttle-blue;
+$linkColorHover: lighten($linkColor, 15%);
+$selectionBackgroundColor: lighten($linkColor, 25%);
+
+$heading1Size: 2.5em;
+$heading2Size: 1.6em;
+$heading3Size: 1.3em;
+$heading4Size: 1em;
+
+section.has-light-background {
+  &,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    color: #222;
+  }
+}
+
+.reveal.cuttlesoft {
+  font-size: $mainFontSize;
+
+  // Helper - top is set by individual classes
+  header {
+    position: absolute;
+    font-size: 30px;
+  }
+
+  hr {
+    background-color: #fff;
+    height: 3px;
+    border: none;
+  }
+
+  pre {
+    width: 100%;
+    padding: 10px;
+    border: 2px white solid;
+  }
+
+  .intro {
+    &__image {
+      width: 200px;
+      position: absolute;
+      left: 40px;
+      border-radius: 50%;
+    }
+
+    &__ul {
+      line-height: 1.8em;
+      list-style: none;
+      margin: 30px 0 0 130px;
+    }
+
+    &__li {
+      padding: 0 0 0 70px;
+
+      &--marker {
+        background: url("../../img/intro/marker.png") no-repeat 0 18px;
+        height: 60px;
+        background-size: auto 60%;
+      }
+
+      &--twitter {
+        background: url("../../img/intro/twitter.png") no-repeat 0 26px;
+        height: 60px;
+        background-size: auto 60%;
+      }
+
+      &--github {
+        background: url("../../img/intro/github.png") no-repeat 0 27px;
+        height: 60px;
+        background-size: auto 60%;
+      }
+    }
+  }
+
+  footer {
+    position: absolute;
+    bottom: 32px;
+    left: 20px;
+    font-size: 20px;
+    color: rgba(255, 255, 255, 0.6);
+  }
+}
+
+// Theme template ------------------------------
+@import "../template/theme";
+// ---------------------------------------------
