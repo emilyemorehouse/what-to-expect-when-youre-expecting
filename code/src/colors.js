@@ -12,6 +12,6 @@ const colors = {
 
 colors.primary = colors.modBlue
 colors.primaryText = 'white'
-colors.background = colors.cuttleBlue
+colors.background = colors.darkGrey
 
 export default colors

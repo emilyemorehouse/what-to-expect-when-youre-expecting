@@ -1,6 +1,5 @@
 import React from 'react'
 import styled, { injectGlobal, ThemeProvider } from 'styled-components'
-import Navigation from './components/Navigation'
 import colors from './colors'
 import theme from './theme'
 
@@ -19,30 +18,56 @@ const AppContainer = styled.div`
   background-color: ${theme.background.lighten(0.8)};
   border: solid 4px ${theme.background};
   width: 80vw;
-  margin: 10px auto;
+  min-height: 80vh;
+  margin: 10vh auto;
   padding: 10px;
-}
 `
 
-const Span = styled.span`
-  background-color: ${theme.primary};
-  border-radius: 51px;
-  color: ${theme.primaryText};
-  padding: 5px;
+const Title = styled.h1`
+  color: white;
+  text-align: center;
+`
+const Dinos = styled.div`
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 10px;
+`
+const Dino = styled.img`
+  width: percentage(1 / 2);
+  align-self: center;
+  justify-self: center;
 `
 
 const App = () => (
   <ThemeProvider theme={colors}>
     <AppContainer>
-      <Navigation />
-      <div>
-        <h1>It Works!</h1>
-        <p>
-          This React project just works including <Span>module</Span> local
-          styles.
-        </p>
-        <p>Enjoy!</p>
-      </div>
+      <Title>
+        Open the door, get on the floor<br />
+        Everybody walk the dinosaur
+      </Title>
+
+      <Dinos>
+        <Dino
+          src="https://res.cloudinary.com/dovbrtmkv/image/upload/c_scale,w_201/v1502316246/Jurassic Pen/diplodocus.png"
+          alt="diplodocus"
+        />
+        <Dino
+          src="https://res.cloudinary.com/dovbrtmkv/image/upload/c_scale,w_201/v1502316246/Jurassic Pen/stegosaurus.png"
+          alt="stegosaurus"
+        />
+        <Dino
+          src="https://res.cloudinary.com/dovbrtmkv/image/upload/c_scale,w_201/v1502316246/Jurassic Pen/allosaurus.png"
+          alt="allosaurus"
+        />
+        <Dino
+          src="https://res.cloudinary.com/dovbrtmkv/image/upload/c_scale,w_201/v1502316246/Jurassic%20Pen/tyrannosaurus-rex.png"
+          alt="tyrannosaurus-rex"
+        />
+        {/* <Dino
+          src="https://res.cloudinary.com/dovbrtmkv/image/upload/c_scale,w_201/v1502316246/Jurassic Pen/brachiosaurus.png"
+          alt="brachiosaurus"
+        /> */}
+      </Dinos>
     </AppContainer>
   </ThemeProvider>
 )
