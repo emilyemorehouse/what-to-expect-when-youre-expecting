@@ -455,30 +455,6 @@
                 </script>
             </section>
 
-
-            <!--
-                * WHAT SHOULD YOU EXPECT? (3 minutes, 12 total)
-                    * Good tests mimic good bug reports:
-                        * What were you testing?
-                        * What should it do?
-                        * What was the output (actual behavior)?
-                        * What was the expected output (expected behavior)?
-            -->
-            <!-- WHAT SHOULD YOU EXPECT? -->
-            <!-- <section data-markdown>
-                <script type="text/template">
-                    ## WHAT SHOULD YOU `EXPECT`?
-
-                    Notes:
-
-                    * When approaching testing, it’s common to come at it from either (or both) of these two ways:
-                        * How do I know this is correct?
-                        * How can I break this?
-                    * The problem is that these things are riddled with edge cases.
-                </script>
-            </section> -->
-
-
             <!--
                 * APPROACHES FOR VISUAL REGRESSION TESTING (2 minutes, 14 total)
                     * Developers maintain a set of “golden” images, whether screenshots or mocks, that represent what the application *should* look like
@@ -607,15 +583,38 @@
 
 
             <!--
+                * WHAT SHOULD YOU EXPECT? (3 minutes, 12 total)
+                    * Good tests mimic good bug reports:
+                        * What were you testing?
+                        * What should it do?
+                        * What was the output (actual behavior)?
+                        * What was the expected output (expected behavior)?
+            -->
+            <!-- WHAT SHOULD YOU EXPECT? -->
+            <section data-markdown>
+                <script type="text/template">
+                    ## WHAT SHOULD YOU `EXPECT`?
+
+                    * Start from user stories <!-- .element: class="fragment" data-fragment-index="1" -->
+                    * Critical business logic <!-- .element: class="fragment" data-fragment-index="2" -->
+                    * Sitemap <!-- .element: class="fragment" data-fragment-index="3" -->
+
+                    Notes:
+                    So: what should you expect? (You knew that was coming)
+
+                    If you have user stories, they’re a good place to start. I mentioned them earlier, but if you have well defined user stories, which are lists of requirements as seen from a user's perspective, then you can use those to guide your tests. Your critical points are what you should start with. What are the parts that completely run your user experience or product? If a user can’t authenticate, you’re pretty screwed. Sometimes the most complex parts are the hardest to test, but that means they’re also the most likely to break.
+
+                    If you don’t have user stories, try generating a sitemap and picking out the parts you want to start with.
+
+                    Also, run your front end tests without your API server running. How does your client handle errors? How do your pages responded if they require authentication but can’t validate the token? What happens if you invalidate a token, or use an expired token?
+                </script>
+            </section>
+
+
+            <!--
                 * CONCLUSION (1 minute, 26 total)
                     * Wrap up and call to action
             -->
-            <!-- CONCLUSION -- SUMMARY -->
-            <section data-markdown>
-                <script type="text/template">
-                    ## CONCLUSION
-                </script>
-            </section>
             <!-- CONCLUSION -- THANK YOU! -->
             <section data-markdown class="small-list">
                 <script type="text/template">
