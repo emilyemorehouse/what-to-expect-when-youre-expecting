@@ -466,16 +466,15 @@
                 <script type="text/template">
                     ## APPROACHES FOR VISUAL REGRESSION TESTING
 
-                    * Snapshots or "Golden Images"<!-- .element: class="fragment" data-fragment-index="1" -->
+                    * Screenshots and "Golden Images"<!-- .element: class="fragment" data-fragment-index="1" -->
                     * An image diff-ing library<!-- .element: class="fragment" data-fragment-index="2" -->
 
-                    Notes: Generally, visual regression tests follow the same patterns as most other testing, they just sprinkle in a few things:
+                    Notes: Generally, visual regression tests follow the same patterns as most other testing. They're similar to snapshot testing, but they just sprinkle in a few things:
 
-                    * Snapshots or "Golden Images"
+                    * Screenshots and "Golden Images"
                     * An image diff-ing library
 
-                    You can then generate and compare snapshots to make sure changes from previous runs are intended
-
+                    You can then generate and compare full screenshots to make sure changes from previous runs are intended
                 </script>
             </section>
 
@@ -497,7 +496,6 @@
                         Running visual regression tests relies on having a browser or browser-like environment. Previously, visual regression testing was tied to manipulating an actual browser using tools like Selenium or PhantomJS. Tools like Selenium have been notoriously difficult to work with, especially when trying to introspect or debug issues.
 
                         [Headless Chrome](https://developers.google.com/web/updates/2017/04/headless-chrome) makes interacting with your browser much easier since you can control test environments without a visible UI
-                        #XXX
                     </script>
             </section>
             <!-- VISUAL REGRESSION TESTING IS EASIER IN 2018 -->
@@ -519,7 +517,18 @@
                     * [Resemble.js](https://github.com/Huddle/Resemble.js) - Visual image comparison
                     * Runner and assertion libraries of choice - we’ll use Mocha and Chai
             -->
-            <!-- WALK-THROUGH - TOOLS FOR VISUAL REGRESSION TESTING -->
+            <!-- WALK-THROUGH -- HEADING -->
+            <section data-markdown>
+                <script type="text/template">
+                    ## VRT WALK-THROUGH
+
+                    ![imready-jonsnow](img/_gifs/imready-jonsnow.gif "I'm Ready.")
+
+                    Notes:
+                    Let's walk-through an example of how you can implement visual regression testing.
+                </script>
+            </section>
+            <!-- WALK-THROUGH -- TOOLS FOR VISUAL REGRESSION TESTING -->
             <section data-markdown>
                 <script type="text/template">
                     ## VRT WALK-THROUGH
@@ -556,29 +565,126 @@
                     ## Install dependencies
 
                     ```shell
-                    yarn add --dev jest enzyme puppeteer resemblejs
+                    npm install --dev jest enzyme puppeteer resemblejs
                     ```
-                </script>
-            </section>
-            <!-- WALK-THROUGH -- -->
-            <section data-markdown>
-                <script type="text/template">
-                    #
 
                     Notes:
-
-
+                    We'll get started by installing dependencies. This is in no way exhaustive, definitely check out the full example code, but these are our key players.
                 </script>
             </section>
-            <!-- WALK-THROUGH -- -->
+            <!-- WALK-THROUGH -- Directories -->
             <section data-markdown>
                 <script type="text/template">
-                    #
+                    ### Create Directories
+
+                    ```javascript
+                    beforeAll(async () => {
+                      if (!fs.existsSync(goldenDir))
+                        fs.mkdirSync(goldenDir)
+                      if (!fs.existsSync(screenshotDir))
+                        fs.mkdirSync(screenshotDir)
+                      if (!fs.existsSync(diffsDir))
+                        fs.mkdirSync(diffsDir)
+                    })
+                    ```
 
                     Notes:
+                    So the first thing you'll want to do is create the directories that you're going to store your "golden" screenshots or your initial mockups in, and your test directory where you're going to store all of your screenshots.
 
+                    So before all of your tests, you're going to want to check that those directories exist.
 
+                    Side-note -- I'm not an advocate for "pixel-perfect" mockup matching -- I believe that you should let your style frameworks do their thing if things line up slightly differently when they're implemented, but I do think you should check for things like typography and consistent alignment.
                 </script>
+            </section>
+
+            <!-- WALK-THROUGH -- Browser -->
+            <section data-markdown>
+                <script type="text/template">
+                    ### Set Up Your Browser Environment
+
+                    ```javascript
+                    beforeEach(async () => {
+                      browser = await puppeteer.launch()
+                      page = await browser.newPage()
+                    })
+                    ```
+
+                    Notes:
+                    Then before each of your tests, you'll want to give yourself a fresh browser and a fresh page using Puppeteer, so all you have to do is call `puppeteer.launch` to get your browser and `browser.newPage` to get your page.
+                </script>
+            </section>
+
+            <!-- WALK-THROUGH -- Screenshot -->
+            <section data-markdown>
+                <script type="text/template">
+                    ### Take your screenshot
+
+                    ```javascript
+                    async function takeAndCompareScreenshot(page, route) {
+                      const fileName = `${screenSize}/${route || 'index'}`
+
+                       await page.goto(`http://localhost:8888/${route}`)
+                       await page.screenshot({ path: `${screenshotDir}/${fileName}.png` })
+
+                       return compareScreenshot(fileName)
+                    }
+                    ```
+
+                    Notes:
+                    First what we'll do is navigate to the route that we want to test and take a screenshot of the page. This is just the helper function that we call -- it's made so that we can pass it a route to make it easier to have a list of pages we want to test. You can also handle clicks and different UI states using Puppeteer, they make it super easy.
+                </script>
+            </section>
+
+            <!-- WALK-THROUGH -- Compare -->
+            <section data-markdown data-transition="none">
+                <script type="text/template">
+                    ### Compare Images
+
+                    ```javascript
+                    async function processScreenshot(fileName) {
+                      const [image1, image2] = await Promise.all([
+                        readImage(`${testDir}/${fileName}.png`),
+                        readImage(`${goldenDir}/${fileName}.png`),
+                      ])
+
+                      const data = await compareImages(image1, image2, options)
+                      await fs.writeFile(`${diffsDir}/${fileName}.png`, data.getBuffer())
+                      expect(data.misMatchPercentage).toBe(100)
+                    }
+                    ```
+
+                    Notes:
+                    Once you have that screenshot, you'll want to compare it to your golden screenshot.
+
+                    #XXX explain
+
+                    I also like to write the diffed image to disk so it can be reviewed later.
+                </script>
+            </section>
+
+            <!-- WALK-THROUGH -- Screenshots -->
+            <section data-markdown data-transition="none">
+                <script type="text/template">
+                        ### Outcome
+
+                        ![reactapp-image-comparison](img/_gifs/reactapp-golden.png "Diff Comparison") <!-- .element: class="fragment screenshot" data-fragment-index="1" -->
+                        ![reactapp-image-comparison](img/_gifs/reactapp-testing.png "Diff Comparison") <!-- .element: class="fragment screenshot" data-fragment-index="2" -->
+
+                        Notes:
+                        #XXX
+                    </script>
+            </section>
+
+            <!-- WALK-THROUGH -- Outcome -->
+            <section data-markdown data-transition="none">
+                <script type="text/template">
+                        ### Outcome
+
+                        ![reactapp-image-comparison](img/_gifs/reactapp-diff.png "Diff Comparison") <!-- .element: class="screenshot" -->
+
+                        Notes:
+                        #XXX
+                    </script>
             </section>
 
 
