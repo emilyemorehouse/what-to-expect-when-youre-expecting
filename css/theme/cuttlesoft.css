@@ -26,8 +26,12 @@ section.has-light-background h6 {
     width: 85%;
     padding: 10px;
     border: 2px white solid; }
+  .reveal.cuttlesoft .lang-javascript {
+    font-size: 0.7em; }
   .reveal.cuttlesoft .small-list li {
     font-size: 0.7em; }
+  .reveal.cuttlesoft .screenshot {
+    width: 45%; }
   .reveal.cuttlesoft footer {
     position: absolute;
     bottom: 32px;
