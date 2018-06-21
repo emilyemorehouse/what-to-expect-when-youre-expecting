@@ -54,12 +54,12 @@
 
                         Notes:
                         A little bit about me first.
-                        My name is Emily Morehouse. I've lived in Denver for a little under 2 years now. I came here by way of Florida where I spent basically the rest before moving to Colorado. So you'd think that the whole "y'all" thing would come easily to me, but it doesn't! So be forgiving.<br>
+                        My name is Emily Morehouse. I've lived in Denver for a little under 2 years now. I came here by way of Florida where I spent basically the rest before moving to Colorado.
 
                         I work for a company called Cuttlesoft - who is a digital product development company where I get to work on anything and everything from
                         CI/CD pipelines and system architectures to web and mobile development, UX and IOT. So I get a chance to touch on a lot of different parts of software in some really cool ways.
 
-                        I'm also @emilyemorehouse pretty much anywhere that you can find me on the internet. These slides along with any code examples are also all on Github.
+                        I'm also @emilyemorehouse pretty much anywhere that you can find me on the internet.
                     </script>
             </section>
 
@@ -100,7 +100,13 @@
                     # TESTING, WAT?
 
                     Notes:
-                    So testing! I kind of joke about this a lot but it's something that is really important. Good testing is hard and great testing is even harder. And that's because I think that when you approach testing your software, the time that you spend writing your tests is not the time that is most outwardly valuable to your end users. You aren't actually delivering new features to your end users when you're writing tests. But, your tests are there for a reason. I like tests because they help me sleep at night! Your goal of writing a test is to be able to pinpoint the different areas of your application in which your code is breaking, or in other forms of testing to actually write a test after your found a bug so it doesn't happen again. (#XXX Maybe mention TDD?) And so you can deliever and continue delivering a high-quality product that people will enjoy using.
+                    So testing! I kind of joke about this a lot but it's something that is really important. Good testing is hard and great testing is even harder.
+
+                    And that's because I think that when you approach testing your software, the time that you spend writing your tests is not the time that is most outwardly valuable to your end users. You aren't actually delivering new features to your end users when you're writing tests
+
+                    But, your tests are there for a reason. I like tests because they help me sleep at night! Your goal of writing a test is to be able to pinpoint the different areas of your application in which your code is breaking, or in other forms of testing to actually write a test after your found a bug so it doesn't happen again or write a correct test so that you can write code that satisfies it.
+
+                    And so you can deliver and continue delivering a high-quality product that people will enjoy using.
 
                     <!-- We all know we should be writing tests for our code, but what does that really mean?
                     What does writing tests “in the real world” look like? -->
@@ -151,18 +157,18 @@
                     - Modular and Direct <!-- .element: class="fragment" data-fragment-index="3" -->
 
                     Notes:
-                    So with that in mind, we know that tests need to be fast so that we can run them locally, we can run them often. We can run them across different browsers and platforms and we're not going to take the whole day for our tests to run in the background before we actually get our test results back.
+                    * So with that in mind, we know that tests need to be fast so that we can run them locally, we can run them often. We can run them across different browsers and platforms and we're not going to take the whole day for our tests to run in the background before we actually get our test results back.
 
-                    Our tests also need to be reliable - we really need to be able to depend on our tests. When they are given the same input, they can produce the same output. A lot of times, this is going to be in regard to temporal bugs that are really hard to reproduce, whether that's from a third-party API that happens to go down but you don't know about it because you haven't written tests or aren't monitoring someone else's API because you don't even have tests for your own API. Or it could be a hardware issue, you could be running your tests on a remote server someplace as part of a Continuous Integration (#XXX or is it CD?) pipeline and for some reason it goes down while you're running your test suite for maintenance or an outage and it winds up failing a bunch of your tests. Anything like that -- you want to make sure that you're tracking and that you can avoid these issues as much as possible so you can be error and fault tolerant and recover from these issues in a timely manner.
+                    * Our tests also need to be reliable - we really need to be able to depend on our tests. When they are given the same input, they can produce the same output. A lot of times, this is going to be in regard to temporal bugs that are really hard to reproduce, whether that's from a third-party API that happens to go down but you don't know about it because you haven't written tests or aren't monitoring someone else's API because you don't even have tests for your own API. Or it could be a hardware issue, you could be running your tests on a remote server someplace as part of a Continuous Integration pipeline and for some reason it goes down while you're running your test suite for maintenance or an outage and it winds up failing a bunch of your tests. Anything like that -- you want to make sure that you're tracking and that you can avoid these issues as much as possible so you can be error and fault tolerant and recover from these issues in a timely manner.
 
-                    And thirdly, you want to make sure that are very modular and very direct. So one of the things that many programmers are taught as a good sort of programming paradigm and style is to make sure that your functions are small enough, whatever X number of lines that's you deem as that limit, make sure that your functions are small enough and atomic (#XXX ?) that they are doing one single thing per function so that you can test individual functionality and focus on doing one thing correctly at a time. And so this is really really helpful when it comes to testing because that means that if you write a test and it fails, you can narrow it down to, 10-20 lines in which your test is failing.
+                    * And thirdly, you want to make sure that are very modular and very direct. So one of the things that many programmers are taught as a good sort of programming paradigm and style is to make sure that your functions are small enough, whatever X number of lines that's you deem as that limit, make sure that your functions are small enough that they are doing one single thing per function so that you can test individual functionality and focus on doing one thing correctly at a time. And so this is really really helpful when it comes to testing because that means that if you write a test and it fails, you can narrow it down to, 10-20 lines in which your test is failing.
 
                     The things that aren't helpful in testing is when you're testing too much too broadly. So say you're trying to test authentication, say registering a new user for your app, and your test just comes back and fails and says "user registration failed". (pause). Have fun with that. So being able to actually test individual functions and how those functions come together is really, really helpful because you can start from these sort of small building blocks of testing individual functions and then you can test how those functions are integrated together and have a much better time at pinpointing where your errors are actually coming from.
                 </script>
             </section>
 
 
-            <!-- SOFTWARE CORRECTNESS -- FV -->
+            <!-- SOFTWARE CORRECTNESS -- FORMAL VERIFICATION -->
             <section data-markdown>
                 <script type="text/template">
                     ### Borrowing from Formal Verification
@@ -171,6 +177,8 @@
 
                     Notes:
                     So going off of this, I like to borrow a lot of ideas from formal verification, and I see a lot of parallels between "formal verification" and "software testing" because the ultimate goals of both are to make sure that software is rid of errors and is fault tolerant and stable.
+
+                    A pillar of formal verification is that no software is inherently correct.
                 </script>
             </section>
 
@@ -182,7 +190,7 @@
                     ![god-montypython](img/_gifs/god-montypython-alt.gif "God from Monty Python")<!-- .element: class="fragment" data-fragment-index="1" -->
 
                     Notes:
-                    There are two different ways we know software is correct. And I very unabashedly (#XXX ?) pulled this from an excellent Medium post by Andrew Helwer, so these are not my words. So we know that software is correct when:
+                    There are two different ways we know software is correct. And I very unabashedly pulled this from an excellent Medium post by Andrew Helwer, so these are not my words. So we know that software is correct when:
                     > The supreme deity of the universe descends from the heavens and decrees, with all the weight of Objective Truth, that a certain piece of software is correct.
                 </script>
             </section>
@@ -225,9 +233,13 @@
 
                     Notes:
                     So when you approach testing, it's very common to come at it in either (or both) of these two ways:
+
                     1) We can say: "how do I know that this software is correct?"
                     or: "How can I break this?"
-                    So one way is saying, for example say that I'm writing a function that computes the sum of two integers and returns the calculation (#XXX better word?). And so we know inherently that we already have a set of truths and proof that using our system of mathematics that we can go through and say yes, if the input is one plus one, the output is two. If the input is one plus two, the output is three. If the input is two plus two, the output is four. And we have this sort of rhythm and set knowledge that if we put in these two inputs that we should always get this discrete outcome. We know that it can be applied across the board so if we're throwing at it a positive number, a negative number, an integer, a float, whatever it is, it's already decided for us. There are no real edge cases that haven't already been addressed and incorporated. Especially in addition. Dividing by 0 like, yeah, you should make sure you're looking out for that. But. In a certain sense, there are no edge cases so we can very easily set out a proof and say okay, I can verify that this function and this code is correct.
+
+                    So one way is saying, for example say that I'm writing a function that computes the sum of two integers and returns the result. And so we know inherently that we already have a set of truths and proof that using our system of mathematics that we can go through and say yes, if the input is one plus one, the output is two. If the input is one plus two, the output is three. If the input is two plus two, the output is four. And we have this sort of rhythm and set knowledge that if we put in these two inputs that we should always get this discrete outcome.
+
+                    We know that it can be applied across the board so if we're throwing at it a positive number, a negative number, an integer, a float, whatever it is, it's already decided for us. There are no real edge cases that haven't already been addressed and incorporated. Especially in addition. Dividing by 0 like, yeah, you should make sure you're looking out for that. But. In a certain sense, there are no edge cases so we can very easily set out a proof and say okay, I can verify that this function and this code is correct.
 
                     The other more fun way of approaching software is "how can I break this?"
                     QA Engineers get to be really really great at breaking things.
@@ -252,6 +264,7 @@
                 </script>
             </section>
 
+
             <!--TESTING STRATEGIES -- USER-CENTRIC -->
             <section data-markdown>
                 <script type="text/template">
@@ -274,9 +287,10 @@
                     ### Visual Regression Tests
 
                     Notes:
-                    So the way that I like to approach testing is that the first test that I am wont (#XXX ?) to write is called a visual regression test. Now regression testing, the definition depends on who you ask and how they're going to define it. A lot of times regression testing specifically refers to a bug that is introduced then you write a test that makes sure that that specific bug isn't introduced again. But I like to think of regression testing as a bit more proactive instead of reactive -- so regression tests are written to ensure that existing functionality that you have remains stable even as you're adding new features or refactoring code.
+                    So the way that I like to approach testing is that the first type of that I like to write is called a visual regression test. Now regression testing, the definition depends on who you ask and how they're going to define it. A lot of times regression testing specifically refers to a bug that is introduced then you write a test that makes sure that that specific bug isn't introduced again. But I like to think of regression testing as a bit more proactive instead of reactive -- so regression tests are written to ensure that existing functionality that you have remains stable even as you're adding new features or refactoring code.
 
                     When you think about approaching your application from the end user's perspective, you can test how your login page works. In the example of a login page, visually, you can see that when you attempt to login with a correct password and a properly working server and API that you give you back accurate responses and a working frontend that can parse that API response and allow you access into the application when the username and password is correct. It's really easy to see that, when you look at it, visually. And if you have thorough user stories, you can write tests based directly on those user stories.
+
                     We know that when the username and password is correct and working properly that the user should be redirected to their homepage. If the user's email or password is incorrect, an error should occur and should be displayed, if your server is down, an error should occur. If any of the pieces are failing, you'll immediately know if by looking at your visual tests. So now the biggest concern is being able to mimic and test different states of your application from a single viewpoint.
                 </script>
             </section>
@@ -390,7 +404,7 @@
                         * Browser or browser-like environment (e.g., Protractor, Nightwatch, Phantom, Casper)
                     * Process:
                         * Generate, display, and watch test results
-                        * Generate and compare snapshots to make sure changes from previous runs are intended
+                        * Generate and compare screenshots to make sure changes from previous runs are intended
                         * Generate code coverage reports
             -->
             <!-- ANATOMY OF A TEST -- INGREDIENTS-->
@@ -510,7 +524,7 @@
                     ![puppeteer-logo](img/_gifs/puppeteer.png "Puppeteer")
 
                     Notes:
-                    Puppeteer #XXX
+                    Puppeteer is a library that makes interacting with Headless Chrome painless. It also makes it much easier to debug and introspect your code.
                 </script>
             </section>
 
@@ -530,9 +544,11 @@
                     * [Puppeteer](https://github.com/GoogleChrome/puppeteer) - Headless Chrome Node API
                     * [Resemble.js](https://github.com/Huddle/Resemble.js) - Visual image comparison
                     * Runner and assertion libraries of choice - we’ll use Jest and Enzyme
+
+                    Notes:
+                    My personal tools of choice:
                 </script>
             </section>
-
 
             <!--
                 * WALK-THROUGH WITH CODE SNIPPETS (this will have a companion repo on GitHub)  (8 minutes, 25 total)
@@ -599,6 +615,9 @@
 
                     - Talk is hosted at: [emilyemorehouse.github.io/what-to-expect-when-youre-expecting](emilyemorehouse.github.io/what-to-expect-when-youre-expecting)
                     - Talk source code and example code are at: [github.com/emilyemorehouse/what-to-expect-when-youre-expecting](github.com/emilyemorehouse/what-to-expect-when-youre-expecting)
+
+                    Notes:
+                    Go forth and test things!
                 </script>
             </section>
         </div>
