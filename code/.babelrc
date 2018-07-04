@@ -4,8 +4,7 @@
     "transform-runtime",
     "transform-decorators-legacy",
     "transform-class-properties",
-    "react-hot-loader/babel",
-    "functional-hmr"
+    "react-hot-loader/babel"
   ],
 
   "env": {
@@ -15,6 +14,9 @@
         "transform-decorators-legacy",
         "transform-class-properties"
       ]
+    },
+    "development": {
+      "plugins": ["functional-hmr"]
     }
   }
 }

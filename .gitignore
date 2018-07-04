@@ -31,6 +31,9 @@ coverage
 # Jest Clutter
 __snapshots__
 
+# Visual Diff Clutter
+__screenshots__
+
 # Grunt intermediate storage (http://gruntjs.com/creating-plugins#storing-task-files)
 .grunt
 

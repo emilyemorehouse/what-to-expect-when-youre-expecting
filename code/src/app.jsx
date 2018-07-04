@@ -30,7 +30,7 @@ const Title = styled.h1`
 const Dinos = styled.div`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  grid-gap: 10px;
+  grid-gap: 20px;
 `
 const Dino = styled.img`
   width: percentage(1 / 2);

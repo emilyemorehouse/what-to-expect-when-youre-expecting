@@ -43,7 +43,7 @@
                         ### A Guide To Regression Testing
 
                         Notes:
-                        Alright everyone! Here we are, first talk of DinosaurJS 2018 and we're here to talk about everyone's favorite subject: testing! (hah)
+                        How to test your apps using Blockchain! ... Jk
                     </script>
             </section>
 
@@ -654,9 +654,18 @@
                         readImage(`${goldenDir}/${fileName}.png`),
                       ])
 
-                      const data = await compareImages(image1, image2, options)
-                      await fs.writeFile(`${diffsDir}/${fileName}.png`, data.getBuffer())
-                      expect(data.misMatchPercentage).toBe(100)
+                      compare(image1, image2, {}, data => {
+                        /* data:
+                          {
+                            misMatchPercentage : 100, // %
+                            isSameDimensions: true, // or false
+                            dimensionDifference: { width: 0, height: -1 }, // defined if dimensions are not the same
+                            getImageDataUrl: function(){}
+                          }
+                        */
+                        await fs.writeFile(`${diffDir}/${fileName}.png`, data.getBuffer())
+                        expect(data.misMatchPercentage).toBe(100)
+                      })
                     }
                     ```
 
@@ -693,6 +702,7 @@
 
                         Notes:
                         #XXX
+                        Switch over to show other options
                     </script>
             </section>
 
