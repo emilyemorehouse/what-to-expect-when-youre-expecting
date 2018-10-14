@@ -23,10 +23,10 @@ $medium-grey: rgb(170, 170, 170); // Medium Grey
 $light-grey: rgb(238, 238, 238); // Light Grey
 
 // Override theme settings (see ../template/settings.scss)
-$backgroundColor: #222;
+$backgroundColor: #fff;
 
-$mainColor: #fff;
-$headingColor: #fff;
+$mainColor: #222;
+$headingColor: #222;
 
 $mainFontSize: 50px;
 $mainFont: "Source Sans Pro", Helvetica, sans-serif;
@@ -66,7 +66,7 @@ section.has-light-background {
   }
 
   hr {
-    background-color: #fff;
+    background-color: #222;
     height: 3px;
     border: none;
   }
@@ -74,7 +74,7 @@ section.has-light-background {
   pre {
     width: 85%;
     padding: 10px;
-    border: 2px white solid;
+    border: 2px #222 solid;
   }
 
   .lang-javascript {
@@ -94,7 +94,7 @@ section.has-light-background {
     bottom: 32px;
     left: 20px;
     font-size: 20px;
-    color: rgba(255, 255, 255, 0.6);
+    color: rgba(0, 0, 0, 0.8);
   }
 }
 
