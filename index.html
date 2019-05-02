@@ -1,124 +1,151 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
-
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport"
-        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
 
     <title>What To Expect When You're Expecting</title>
 
-    <link rel="stylesheet"
-        href="css/reveal.css">
-    <link rel="stylesheet"
-        href="css/theme/cuttlesoft.css">
+    <link rel="stylesheet" href="css/reveal.css" />
+    <link rel="stylesheet" href="css/theme/cuttlesoft.css" />
 
     <!-- Theme used for syntax highlighting of code -->
-    <link rel="stylesheet"
-        href="lib/css/railscasts.css">
+    <link rel="stylesheet" href="lib/css/railscasts.css" />
 
     <!-- Printing and PDF exports -->
     <script>
-        var link = document.createElement('link');
-        link.rel = 'stylesheet';
-        link.type = 'text/css';
-        link.href = window.location.search.match(/print-pdf/gi) ? 'css/print/pdf.css' : 'css/print/paper.css';
-        document.getElementsByTagName('head')[0].appendChild(link);
+      var link = document.createElement("link");
+      link.rel = "stylesheet";
+      link.type = "text/css";
+      link.href = window.location.search.match(/print-pdf/gi)
+        ? "css/print/pdf.css"
+        : "css/print/paper.css";
+      document.getElementsByTagName("head")[0].appendChild(link);
     </script>
-</head>
+  </head>
 
-<body>
+  <body>
     <div class="reveal cuttlesoft">
-        <div class="slides">
-            <!--
+      <div class="slides">
+        <!--
                 * INTRODUCTION AND OUTLINE (1 minute, 1 total)
                     * Quick introduction of myself
                     * Outline of what will be covered and what you will learn
                     * My motivation for giving this talk
             -->
-            <!-- INTRO -- TITLE -->
-            <section data-markdown>
-                <script type="text/template">
-                        # What To Expect When You're Expecting🤰🏻
-                        ### A Guide To Regression Testing
+        <!-- INTRO -- TITLE -->
+        <section data-markdown>
+          <script type="text/template">
+            # What To Expect When You're Expecting🤰🏻
+            ### A Guide To Regression Testing
 
-                        Notes:
-                        How to test your apps using Blockchain! ... Jk
-                    </script>
-            </section>
+            Notes:
+            How to test your apps using Blockchain! ... Jk
+          </script>
+        </section>
 
-            <!-- INTRO -- ABOUT - HEADER -->
-            <section data-markdown>
-                <script type="text/template">
-                        #### WHO AM I?
-                        ---
-                        - Emily (@emilyemorehouse) <!-- .element: class="fragment" data-fragment-index="1" -->
-                        - Director of Engineering @ Cuttlesoft <!-- .element: class="fragment" data-fragment-index="2" -->
-                        - Python Core Developer <!-- .element: class="fragment" data-fragment-index="3" -->
-                        - Polyglot, Axios Maintainer, Visual Testing Proponent, Auto-Format Fan, Language Nerd <!-- .element: class="fragment" data-fragment-index="4" -->
+        <!-- INTRO -- RESOURCES -->
+        <section data-markdown>
+          <script type="text/template">
+            ### Workshop Resources
 
-                        Notes:
-                        A little bit about me first.
-                        My name is Emily Morehouse. I've lived in Denver for a little under 2 years now. I came here by way of Florida where I spent basically the rest before moving to Colorado.
+            - Slides: **bit.ly/WTEWYE-slides**
+            - Repo: **bit.ly/WTEWYE-slides-code**
 
-                        I work for a company called Cuttlesoft - who is a digital product development company where I get to work on anything and everything from
-                        CI/CD pipelines and system architectures to web and mobile development, UX and IOT. So I get a chance to touch on a lot of different parts of software in some really cool ways.
+            (WTEWYE = What To Expect When You're Expecting)
 
-                        I'm also @emilyemorehouse pretty much anywhere that you can find me on the internet.
-                    </script>
-            </section>
+            Notes:
+            - How many first time attendees? Did a workshop yesterday? Are forced here by their boss?
+            - THANK YOU for responding to the survey!
+            - VERY mixed room, if you have less experience with Python, I encourage you to try to
+            soak up as much high level info as you can, don't get discouraged if you don't understand
+            exactly how something works
+          </script>
+        </section>
 
-            <!-- INTRO -- OVERVIEW -->
-            <section data-markdown>
-                <script type="text/template">
-                    ### Overview
-                    - Overview of Testing
-                    - Importance of Consistent Testing <!-- .element: class="fragment" data-fragment-index="1" -->
-                    - Software Correctness <!-- .element: class="fragment" data-fragment-index="2" -->
-                    - Approaches <!-- .element: class="fragment" data-fragment-index="3" -->
-                    - Anatomy of a Test  <!-- .element: class="fragment" data-fragment-index="4" -->
-                    - Visual Regression Testing  <!-- .element: class="fragment" data-fragment-index="5" -->
-                        - Approaches <!-- .element: class="fragment" data-fragment-index="6" -->
-                        - Walk-through <!-- .element: class="fragment" data-fragment-index="7" -->
+        <!-- INTRO -- ABOUT - HEADER -->
+        <section data-markdown>
+          <script type="text/template">
+            #### WHO AM I?
+            ---
+            - Emily (@emilyemorehouse) <!-- .element: class="fragment" data-fragment-index="1" -->
+            - Director of Engineering @ Cuttlesoft <!-- .element: class="fragment" data-fragment-index="2" -->
+            - Python Core Developer <!-- .element: class="fragment" data-fragment-index="3" -->
+            - Polyglot, Axios Maintainer, Visual Testing Proponent, Auto-Format Fan, Language Nerd <!-- .element: class="fragment" data-fragment-index="4" -->
 
-                    Notes:
-                    So let's start off with a quick overview on what you can expect to get out of this talk.
+            Notes:
+            A little bit about me first.
+            My name is Emily Morehouse. I've lived in Denver for a little under 2 years now. I came here by way of Florida where I spent basically the rest before moving to Colorado.
 
-                    - First we're going to start out with a sort of rapid-fire possible rambling introduction to testing
-                    - We'll talk about why it's important to have consistent tests and what that actually means
-                    - A little about software correctness and criteria for "correct" software
-                    - Approaches for software testing
-                    - Then we'll talk about the anatomy of a test -- the different ingredients and processes in which you actually write your tests
-                    - Then we're going to take more of a deep dive into visual regression testing. Why I think visual regression testing is really important and super neat, and some of my favorite tools that you can use to write visual regression tests for your projects.
-                </script>
-            </section>
+            I work for a company called Cuttlesoft - who is a digital product development company where I get to work on anything and everything from
+            CI/CD pipelines and system architectures to web and mobile development, UX and IOT. So I get a chance to touch on a lot of different parts of software in some really cool ways.
 
+            I'm also @emilyemorehouse pretty much anywhere that you can find me on the internet.
+          </script>
+        </section>
 
-            <!--
+        <!-- INTRO -- SCHEDULING -->
+        <section data-markdown>
+          <script type="text/template">
+            #### Schedule
+            - **1:20 - 1:40 pm** Introduction
+            - **1:40 - 2:00 pm** Set Up Check (Part 1)
+            - **2:00 - 3:00 pm** Regression Testing in Django
+            - **3:00 - 3:30 pm** Break, Set Up Check (Part 2)
+            - **3:30 - 4:40 pm** Visual Regression Testing
+          </script>
+        </section>
+
+        <!-- INTRO -- OVERVIEW -->
+        <section data-markdown>
+          <script type="text/template">
+            ### Introduction Overview
+            - Overview of Testing
+            - Importance of Consistent Testing <!-- .element: class="fragment" data-fragment-index="1" -->
+            - Software Correctness <!-- .element: class="fragment" data-fragment-index="2" -->
+            - Approaches <!-- .element: class="fragment" data-fragment-index="3" -->
+            - Anatomy of a Test  <!-- .element: class="fragment" data-fragment-index="4" -->
+
+            Notes:
+            So let's start off with a quick overview on what you can expect to get out of this talk.
+
+            - First we're going to start out with a sort of rapid-fire possible rambling introduction to testing
+            - We'll talk about why it's important to have consistent tests and what that actually means
+            - A little about software correctness and criteria for "correct" software
+            - Approaches for software testing
+            - Then we'll talk about the anatomy of a test -- the different ingredients and processes in which you actually write your tests
+            - Then we're going to take more of a deep dive into visual regression testing. Why I think visual regression testing is really important and super neat, and some of my favorite tools that you can use to write visual regression tests for your projects.
+          </script>
+        </section>
+
+        <!--
                 * TESTING, WAT? (1 minute, 2 total)
                     * We all know we should be writing tests for our code, but what does that really mean?
                     * What does writing tests “in the real world” look like?
             -->
-            <!-- TESTING, WAT -- HEADER -->
-            <section data-markdown>
-                <script type="text/template">
-                    # TESTING, WAT?
+        <!-- TESTING, WAT -- HEADER -->
+        <section data-markdown>
+          <script type="text/template">
+            # TESTING, WAT?
 
-                    Notes:
-                    So testing! I kind of joke about this a lot but it's something that is really important. Good testing is hard and great testing is even harder.
+            Notes:
+            So testing! I kind of joke about this a lot but it's something that is really important. Good testing is hard and great testing is even harder.
 
-                    And that's because I think that when you approach testing your software, the time that you spend writing your tests is not the time that is most outwardly valuable to your end users. You aren't actually delivering new features to your end users when you're writing tests
+            And that's because I think that when you approach testing your software, the time that you spend writing your tests is not the time that is most outwardly valuable to your end users. You aren't actually delivering new features to your end users when you're writing tests
 
-                    But, your tests are there for a reason. I like tests because they help me sleep at night! Your goal of writing a test is to be able to pinpoint the different areas of your application in which your code is breaking, or in other forms of testing to actually write a test after your found a bug so it doesn't happen again or write a correct test so that you can write code that satisfies it.
+            But, your tests are there for a reason. I like tests because they help me sleep at night! Your goal of writing a test is to be able to pinpoint the different areas of your application in which your code is breaking, or in other forms of testing to actually write a test after your found a bug so it doesn't happen again or write a correct test so that you can write code that satisfies it.
 
-                    And so you can deliver and continue delivering a high-quality product that people will enjoy using.
+            And so you can deliver and continue delivering a high-quality product that people will enjoy using.
 
-                    <!-- We all know we should be writing tests for our code, but what does that really mean?
-                    What does writing tests “in the real world” look like? -->
-                </script>
-            </section>
+            <!-- We all know we should be writing tests for our code, but what does that really mean?
+            What does writing tests “in the real world” look like? -->
+          </script>
+        </section>
 
-            <!--
+        <!--
                 * OVERVIEW (3 minutes, 5 total)
                     * Rapid-Fire Introduction to Testing - 20,000 foot view, short descriptions of different types of testing
                         * Unit Testing
@@ -134,291 +161,274 @@
                     * What kinds of tests are most impactful for different use cases?
                     * Shout out to accessibility testing - it’s surprisingly easy to do and can point out oversights that are very easy to fix and are very impactful
             -->
-            <!-- RAPID-FIRE INTRODUCTION TO TESTING -->
-            <section data-markdown
-                data-transition="none">
-                <script type="text/template">
-                    ### Types of Testing
-                    #### Unit Testing
+        <!-- RAPID-FIRE INTRODUCTION TO TESTING -->
+        <section data-markdown data-transition="none">
+          <script type="text/template">
+            ### Types of Testing
+            #### Unit Testing
 
-                    Notes:
-                </script>
-            </section>
-            <section data-markdown
-                data-transition="none">
-                <script type="text/template">
-                    ### Types of Testing
-                    #### Integration Testing
+            Notes:
+          </script>
+        </section>
+        <section data-markdown data-transition="none">
+          <script type="text/template">
+            ### Types of Testing
+            #### Integration Testing
 
-                    Notes:
-                </script>
-            </section>
-            <section data-markdown
-                data-transition="none">
-                <script type="text/template">
-                    ### Types of Testing
-                    #### Regression Testing
+            Notes:
+          </script>
+        </section>
+        <section data-markdown data-transition="none">
+          <script type="text/template">
+            ### Types of Testing
+            #### Regression Testing
 
-                    Notes:
-                </script>
-            </section>
-            <section data-markdown
-                data-transition="none">
-                <script type="text/template">
-                    ### Types of Testing
-                    #### Functional Testing
+            Notes:
+          </script>
+        </section>
+        <section data-markdown data-transition="none">
+          <script type="text/template">
+            ### Types of Testing
+            #### Functional Testing
 
-                    Notes:
-                </script>
-            </section>
-            <section data-markdown
-                data-transition="none">
-                <script type="text/template">
-                    ### Types of Testing
-                    #### Snapshot Testing
+            Notes:
+          </script>
+        </section>
+        <section data-markdown data-transition="none">
+          <script type="text/template">
+            ### Types of Testing
+            #### Snapshot Testing
 
-                    Notes:
-                </script>
-            </section>
-            <section data-markdown
-                data-transition="none">
-                <script type="text/template">
-                    ### Types of Testing
-                    #### System Testing
+            Notes:
+          </script>
+        </section>
+        <section data-markdown data-transition="none">
+          <script type="text/template">
+            ### Types of Testing
+            #### System Testing
 
-                    Notes:
-                </script>
-            </section>
-            <section data-markdown
-                data-transition="none">
-                <script type="text/template">
-                    ### Types of Testing
-                    #### Performance Testing
+            Notes:
+          </script>
+        </section>
+        <section data-markdown data-transition="none">
+          <script type="text/template">
+            ### Types of Testing
+            #### Performance Testing
 
-                    Notes:
-                </script>
-            </section>
-            <section data-markdown
-                data-transition="none">
-                <script type="text/template">
-                    ### Types of Testing
-                    #### Usability Testing
+            Notes:
+          </script>
+        </section>
+        <section data-markdown data-transition="none">
+          <script type="text/template">
+            ### Types of Testing
+            #### Usability Testing
 
-                    Notes:
-                </script>
-            </section>
-            <section data-markdown
-                data-transition="none">
-                <script type="text/template">
-                    ### Types of Testing
-                    #### Accessibility Testing
+            Notes:
+          </script>
+        </section>
+        <section data-markdown data-transition="none">
+          <script type="text/template">
+            ### Types of Testing
+            #### Accessibility Testing
 
-                    Notes:
-                </script>
-            </section>
-            <section data-markdown
-                data-transition="none">
-                <script type="text/template">
-                    ### Types of Testing
-                    #### Chaos Testing
+            Notes:
+          </script>
+        </section>
+        <section data-markdown data-transition="none">
+          <script type="text/template">
+            ### Types of Testing
+            #### Chaos Testing
 
-                    Notes:
-                </script>
-            </section>
-            <section data-markdown
-                data-transition="none">
-                <script type="text/template">
-                    ### Types of Testing
-                    #### Stress Testing
+            Notes:
+          </script>
+        </section>
+        <section data-markdown data-transition="none">
+          <script type="text/template">
+            ### Types of Testing
+            #### Stress Testing
 
-                    Notes:
-                </script>
-            </section>
+            Notes:
+          </script>
+        </section>
 
-            <!--
+        <!--
                 * THE IMPORTANCE OF CONSISTENT REGRESSION TESTING (1 minutes, 6 total)
                     * [Change blindness](http://enacademic.com/dic.nsf/enwiki/1159161) - the human brain isn’t good at remembering minute details of stimuli, and therefore it’s much better to let a computer handle detecting changes, both visual and functional
                     * The larger your application gets, the more existing features may (unintentionally) break as you add new code!
             -->
-            <!-- THE IMPORTANCE OF CONSISTENT (REGRESSION) TESTING -- CHANGE BLINDNESS  -->
-            <section data-markdown>
-                <script type="text/template">
-                    ### Change Blindness
+        <!-- THE IMPORTANCE OF CONSISTENT (REGRESSION) TESTING -- CHANGE BLINDNESS  -->
+        <section data-markdown>
+          <script type="text/template">
+            ### Change Blindness
 
-                    ![djangocon_original](img/gifs/djangocon_original.png "Original") <!-- .element: class="fragment screenshot" data-fragment-index="1" -->
-                    ![djangocon_changed](img/gifs/djangocon_changed.png "Changed") <!-- .element: class="fragment screenshot" data-fragment-index="2" -->
+            ![pycon_original](img/gifs/pycon_original.png "Original") <!-- .element: class="fragment screenshot" data-fragment-index="1" -->
+            ![pycon_changed](img/gifs/pycon_changed.png "Changed") <!-- .element: class="fragment screenshot" data-fragment-index="2" -->
 
-                    Notes:
-                    #XXX
-                    The larger your application gets, the more existing features may (unintentionally) break as you add new code!
+            Notes:
+            #XXX
+            The larger your application gets, the more existing features may (unintentionally) break as you add new code!
 
-                    The human brain isn’t good at remembering minute details of stimuli, and therefore it’s much better to let a computer handle detecting changes, both visual and functional
-                </script>
-            </section>
+            The human brain isn’t good at remembering minute details of stimuli, and therefore it’s much better to let a computer handle detecting changes, both visual and functional
+          </script>
+        </section>
 
-            <!-- THE IMPORTANCE OF CONSISTENT (REGRESSION) TESTING -- CATCHING BUGS -->
-            <section data-markdown>
-                <script type="text/template">
-                    ### Tests only catch bugs when…
+        <!-- THE IMPORTANCE OF CONSISTENT (REGRESSION) TESTING -- CATCHING BUGS -->
+        <section data-markdown>
+          <script type="text/template">
+            ### Tests only catch bugs when…
 
-                    1. You run your tests <!-- .element: class="fragment" data-fragment-index="1" -->
-                    2. You’ve written a test that catches the bug <!-- .element: class="fragment" data-fragment-index="2" -->
+            1. You run your tests <!-- .element: class="fragment" data-fragment-index="1" -->
+            2. You’ve written a test that catches the bug <!-- .element: class="fragment" data-fragment-index="2" -->
 
-                    Notes:
-                    But one of the huge "gotchas" with tests is that tests actually only catch your bugs when 1) you actually run your tests, and 2) when you've successfully written a test that properly catches your bug.
-                </script>
-            </section>
+            Notes:
+            But one of the huge "gotchas" with tests is that tests actually only catch your bugs when 1) you actually run your tests, and 2) when you've successfully written a test that properly catches your bug.
+          </script>
+        </section>
 
-            <!-- THE IMPORTANCE OF CONSISTENT (REGRESSION) TESTING -- TESTING CRITERIA -->
-            <section data-markdown>
-                <script type="text/template">
-                    ### Tests should be:
-                    - Fast <!-- .element: class="fragment" data-fragment-index="1" -->
-                    - Reliable <!-- .element: class="fragment" data-fragment-index="2" -->
-                    - Modular and Direct <!-- .element: class="fragment" data-fragment-index="3" -->
+        <!-- THE IMPORTANCE OF CONSISTENT (REGRESSION) TESTING -- TESTING CRITERIA -->
+        <section data-markdown>
+          <script type="text/template">
+            ### Tests should be:
+            - Fast <!-- .element: class="fragment" data-fragment-index="1" -->
+            - Reliable <!-- .element: class="fragment" data-fragment-index="2" -->
+            - Modular and Direct <!-- .element: class="fragment" data-fragment-index="3" -->
 
-                    Notes:
-                    * So with that in mind, we know that tests need to be fast so that we can run them locally, we can run them often. We can run them across different browsers and platforms and we're not going to take the whole day for our tests to run in the background before we actually get our test results back.
+            Notes:
+            * So with that in mind, we know that tests need to be fast so that we can run them locally, we can run them often. We can run them across different browsers and platforms and we're not going to take the whole day for our tests to run in the background before we actually get our test results back.
 
-                    * Our tests also need to be reliable - we really need to be able to depend on our tests. When they are given the same input, they can produce the same output. A lot of times, this is going to be in regard to temporal bugs that are really hard to reproduce, whether that's from a third-party API that happens to go down but you don't know about it because you haven't written tests or aren't monitoring someone else's API because you don't even have tests for your own API. Or it could be a hardware issue, you could be running your tests on a remote server someplace as part of a Continuous Integration pipeline and for some reason it goes down while you're running your test suite for maintenance or an outage and it winds up failing a bunch of your tests. Anything like that -- you want to make sure that you're tracking and that you can avoid these issues as much as possible so you can be error and fault tolerant and recover from these issues in a timely manner.
+            * Our tests also need to be reliable - we really need to be able to depend on our tests. When they are given the same input, they can produce the same output. A lot of times, this is going to be in regard to temporal bugs that are really hard to reproduce, whether that's from a third-party API that happens to go down but you don't know about it because you haven't written tests or aren't monitoring someone else's API because you don't even have tests for your own API. Or it could be a hardware issue, you could be running your tests on a remote server someplace as part of a Continuous Integration pipeline and for some reason it goes down while you're running your test suite for maintenance or an outage and it winds up failing a bunch of your tests. Anything like that -- you want to make sure that you're tracking and that you can avoid these issues as much as possible so you can be error and fault tolerant and recover from these issues in a timely manner.
 
-                    * And thirdly, you want to make sure that are very modular and very direct. So one of the things that many programmers are taught as a good sort of programming paradigm and style is to make sure that your functions are small enough, whatever X number of lines that's you deem as that limit, make sure that your functions are small enough that they are doing one single thing per function so that you can test individual functionality and focus on doing one thing correctly at a time. And so this is really really helpful when it comes to testing because that means that if you write a test and it fails, you can narrow it down to, 10-20 lines in which your test is failing.
+            * And thirdly, you want to make sure that are very modular and very direct. So one of the things that many programmers are taught as a good sort of programming paradigm and style is to make sure that your functions are small enough, whatever X number of lines that's you deem as that limit, make sure that your functions are small enough that they are doing one single thing per function so that you can test individual functionality and focus on doing one thing correctly at a time. And so this is really really helpful when it comes to testing because that means that if you write a test and it fails, you can narrow it down to, 10-20 lines in which your test is failing.
 
-                    The things that aren't helpful in testing is when you're testing too much too broadly. So say you're trying to test authentication, say registering a new user for your app, and your test just comes back and fails and says "user registration failed". (pause). Have fun with that. So being able to actually test individual functions and how those functions come together is really, really helpful because you can start from these sort of small building blocks of testing individual functions and then you can test how those functions are integrated together and have a much better time at pinpointing where your errors are actually coming from.
-                </script>
-            </section>
+            The things that aren't helpful in testing is when you're testing too much too broadly. So say you're trying to test authentication, say registering a new user for your app, and your test just comes back and fails and says "user registration failed". (pause). Have fun with that. So being able to actually test individual functions and how those functions come together is really, really helpful because you can start from these sort of small building blocks of testing individual functions and then you can test how those functions are integrated together and have a much better time at pinpointing where your errors are actually coming from.
+          </script>
+        </section>
 
+        <!-- SOFTWARE CORRECTNESS -- FORMAL VERIFICATION -->
+        <section data-markdown>
+          <script type="text/template">
+            ### Borrowing from Formal Verification
 
-            <!-- SOFTWARE CORRECTNESS -- FORMAL VERIFICATION -->
-            <section data-markdown>
-                <script type="text/template">
-                    ### Borrowing from Formal Verification
+            ![honey-i-shrunk-the-kids-investigating](img/gifs/investigate-honeyishrunkthekids.gif "Honey I Shrunk the Kids - Investigating")
 
-                    ![honey-i-shrunk-the-kids-investigating](img/gifs/investigate-honeyishrunkthekids.gif "Honey I Shrunk the Kids - Investigating")
+            Notes:
+            So going off of this, I like to borrow a lot of ideas from formal verification, and I see a lot of parallels between "formal verification" and "software testing" because the ultimate goals of both are to make sure that software is rid of errors and is fault tolerant and stable.
 
-                    Notes:
-                    So going off of this, I like to borrow a lot of ideas from formal verification, and I see a lot of parallels between "formal verification" and "software testing" because the ultimate goals of both are to make sure that software is rid of errors and is fault tolerant and stable.
+            A pillar of formal verification is that no software is inherently correct.
+          </script>
+        </section>
 
-                    A pillar of formal verification is that no software is inherently correct.
-                </script>
-            </section>
+        <!-- SOFTWARE CORRECTNESS -- SCENARIOS -->
+        <section data-markdown data-transition="none">
+          <script type="text/template">
+            ### Software Correctness
 
-            <!-- SOFTWARE CORRECTNESS -- SCENARIOS -->
-            <section data-markdown
-                data-transition="none">
-                <script type="text/template">
-                    ### Software Correctness
+            ![god-montypython](img/gifs/god-montypython-alt.gif "God from Monty Python")<!-- .element: class="fragment" data-fragment-index="1" -->
 
-                    ![god-montypython](img/gifs/god-montypython-alt.gif "God from Monty Python")<!-- .element: class="fragment" data-fragment-index="1" -->
+            Notes:
+            There are two different ways we know software is correct. And I very unabashedly pulled this from an excellent Medium post by Andrew Helwer, so these are not my words. So we know that software is correct when:
+            > The supreme deity of the universe descends from the heavens and decrees, with all the weight of Objective Truth, that a certain piece of software is correct.
+          </script>
+        </section>
+        <section data-markdown data-transition="none">
+          <script type="text/template">
+            ### Software Correctness
 
-                    Notes:
-                    There are two different ways we know software is correct. And I very unabashedly pulled this from an excellent Medium post by Andrew Helwer, so these are not my words. So we know that software is correct when:
-                    > The supreme deity of the universe descends from the heavens and decrees, with all the weight of Objective Truth, that a certain piece of software is correct.
-                </script>
-            </section>
-            <section data-markdown
-                data-transition="none">
-                <script type="text/template">
-                    ### Software Correctness
+            ![long-ass-list](img/gifs/long-ass-list.gif "Super Long List")
 
-                    ![long-ass-list](img/gifs/long-ass-list.gif "Super Long List")
+            Notes:
+            Or, what happens more frequently is that we have a list of things we want the software to do, and use a certain amount of logic to prove the software does these things.
+          </script>
+        </section>
 
-                    Notes:
-                    Or, what happens more frequently is that we have a list of things we want the software to do, and use a certain amount of logic to prove the software does these things.
-                </script>
-            </section>
+        <!-- SOFTWARE CORRECTNESS -- OBJECTIVE TRUTHS-->
+        <section data-markdown>
+          <script type="text/template">
+            # Objective Truth ✨
 
-            <!-- SOFTWARE CORRECTNESS -- OBJECTIVE TRUTHS-->
-            <section data-markdown>
-                <script type="text/template">
-                    # Objective Truth ✨
+            Notes:
+            Now in the first scenario, as silly as it is, we're talking about objective truths. We're talking about things that are not going to be debated. And also, this sort of all-knowing-powerful knowledge that everything that has been and everything that will be is known by this being, right? And the thing is that that isn't the reality of software testing. Functionality can be subjective, it can be ill-defined, and it certainly can be relative...
+          </script>
+        </section>
 
-                    Notes:
-                    Now in the first scenario, as silly as it is, we're talking about objective truths. We're talking about things that are not going to be debated. And also, this sort of all-knowing-powerful knowledge that everything that has been and everything that will be is known by this being, right? And the thing is that that isn't the reality of software testing. Functionality can be subjective, it can be ill-defined, and it certainly can be relative...
-                </script>
-            </section>
+        <!-- SOFTWARE CORRECTNESS -- OBJECTIVE TRUTHS - part 2-->
+        <section data-markdown>
+          <script type="text/template">
+            ![relativism-it-worked-on-my-machine](img/gifs/relativism-it-worked-on-my-machine.jpg "It Worked On My Machine!")
+          </script>
+        </section>
 
-            <!-- SOFTWARE CORRECTNESS -- OBJECTIVE TRUTHS - part 2-->
-            <section data-markdown>
-                <script type="text/template">
-                    ![relativism-it-worked-on-my-machine](img/gifs/relativism-it-worked-on-my-machine.jpg "It Worked On My Machine!")
-                </script>
-            </section>
+        <!-- SOFTWARE TESTING -- APPROACHES-->
+        <section data-markdown>
+          <script type="text/template">
+            ### Testing Approaches:
 
+            * How do I know this is correct? <!-- .element: class="fragment" data-fragment-index="1" -->
+            * How can I break this? <!-- .element: class="fragment" data-fragment-index="2" -->
 
-            <!-- SOFTWARE TESTING -- APPROACHES-->
-            <section data-markdown>
-                <script type="text/template">
-                    ### Testing Approaches:
+            Notes:
+            So when you approach testing, it's very common to come at it in either (or both) of these two ways:
 
-                    * How do I know this is correct? <!-- .element: class="fragment" data-fragment-index="1" -->
-                    * How can I break this? <!-- .element: class="fragment" data-fragment-index="2" -->
+            1) We can say: "how do I know that this software is correct?"
+            or: "How can I break this?"
 
-                    Notes:
-                    So when you approach testing, it's very common to come at it in either (or both) of these two ways:
+            So one way is saying, for example say that I'm writing a function that computes the sum of two integers and returns the result. And so we know inherently that we already have a set of truths and proof that using our system of mathematics that we can go through and say yes, if the input is one plus one, the output is two. If the input is one plus two, the output is three. If the input is two plus two, the output is four. And we have this sort of rhythm and set knowledge that if we put in these two inputs that we should always get this discrete outcome.
 
-                    1) We can say: "how do I know that this software is correct?"
-                    or: "How can I break this?"
+            We know that it can be applied across the board so if we're throwing at it a positive number, a negative number, an integer, a float, whatever it is, it's already decided for us. There are no real edge cases that haven't already been addressed and incorporated. Especially in addition. Dividing by 0 like, yeah, you should make sure you're looking out for that. But. In a certain sense, there are no edge cases so we can very easily set out a proof and say okay, I can verify that this function and this code is correct.
 
-                    So one way is saying, for example say that I'm writing a function that computes the sum of two integers and returns the result. And so we know inherently that we already have a set of truths and proof that using our system of mathematics that we can go through and say yes, if the input is one plus one, the output is two. If the input is one plus two, the output is three. If the input is two plus two, the output is four. And we have this sort of rhythm and set knowledge that if we put in these two inputs that we should always get this discrete outcome.
+            The other more fun way of approaching software is "how can I break this?"
+            QA Engineers get to be really really great at breaking things.
 
-                    We know that it can be applied across the board so if we're throwing at it a positive number, a negative number, an integer, a float, whatever it is, it's already decided for us. There are no real edge cases that haven't already been addressed and incorporated. Especially in addition. Dividing by 0 like, yeah, you should make sure you're looking out for that. But. In a certain sense, there are no edge cases so we can very easily set out a proof and say okay, I can verify that this function and this code is correct.
+            And the problem is that when you have these two things you're approaching the problem from two sides, but you're missing a lot of the middle. That is where testing fails at verifying software most often.
+          </script>
+        </section>
 
-                    The other more fun way of approaching software is "how can I break this?"
-                    QA Engineers get to be really really great at breaking things.
+        <!--THEORY V REALITY -->
+        <section data-markdown>
+          <script type="text/template">
+            ### THEORY vs REALITY
 
-                    And the problem is that when you have these two things you're approaching the problem from two sides, but you're missing a lot of the middle. That is where testing fails at verifying software most often.
-                </script>
-            </section>
+            ![red-pill-blue-pill](img/gifs/red-pill-blue-pill.gif "Red pill v Blue pill (Matrix)")
 
+            Notes:
+            So, we can talk about software testing in theory and in reality.
+            In theory, you have 100% test coverage and your tests are going to catch every single bug that could possibly exist in your code. The reality is that that's never going to be the case. Even if you have 100% test coverage, that doesn't mean that you're actually testing for the right things in your code.
 
-            <!--THEORY V REALITY -->
-            <section data-markdown>
-                <script type="text/template">
-                    ### THEORY vs REALITY
+            As an engineer, knowing that the number of tests that I write might help me sleep at night is great, but knowing that the less time I spend writing tests, the more time I can spend writing code and delivering features to a user is even better.
+          </script>
+        </section>
 
-                    ![red-pill-blue-pill](img/gifs/red-pill-blue-pill.gif "Red pill v Blue pill (Matrix)")
+        <!--TESTING STRATEGIES -- USER-CENTRIC -->
+        <section data-markdown>
+          <script type="text/template">
+            ### Testing Strategies:
 
-                    Notes:
-                    So, we can talk about software testing in theory and in reality.
-                    In theory, you have 100% test coverage and your tests are going to catch every single bug that could possibly exist in your code. The reality is that that's never going to be the case. Even if you have 100% test coverage, that doesn't mean that you're actually testing for the right things in your code.
+            ### User-Centric... Everything
 
-                    As an engineer, knowing that the number of tests that I write might help me sleep at night is great, but knowing that the less time I spend writing tests, the more time I can spend writing code and delivering features to a user is even better.
-                </script>
-            </section>
+            Notes:
+            One of the ways that I've tried to optimize for this, especially working for a company where not all of our clients are going to be able to put in the money to have full and robust test suites, is to take one of the paradigms that is very prevalent in software engineering, and focusing everything around the user.
 
+            Integration tests are hard. Integration tests are going to make sure that all of the different pieces of your software are working together properly and that nothing's broken. BUT that means that everything needs to have a test, which is not so easy.
+          </script>
+        </section>
 
-            <!--TESTING STRATEGIES -- USER-CENTRIC -->
-            <section data-markdown>
-                <script type="text/template">
-                    ### Testing Strategies:
+        <!--TESTING STRATEGIES -- VRT -->
+        <section data-markdown>
+          <script type="text/template">
+            ### Testing Strategies:
 
-                    ### User-Centric... Everything
+            ### Visual Regression Tests
 
-                    Notes:
-                    One of the ways that I've tried to optimize for this, especially working for a company where not all of our clients are going to be able to put in the money to have full and robust test suites, is to take one of the paradigms that is very prevalent in software engineering, and focusing everything around the user.
+            Notes:
+            So the way that I like to approach testing is that the first type of that I like to write is called a visual regression test. Now regression testing, the definition depends on who you ask and how they're going to define it. A lot of times regression testing specifically refers to a bug that is introduced then you write a test that makes sure that that specific bug isn't introduced again. But I like to think of regression testing as a bit more proactive instead of reactive -- so regression tests are written to ensure that existing functionality that you have remains stable even as you're adding new features or refactoring code.
 
-                    Integration tests are hard. Integration tests are going to make sure that all of the different pieces of your software are working together properly and that nothing's broken. BUT that means that everything needs to have a test, which is not so easy.
-                </script>
-            </section>
+            When you think about approaching your application from the end user's perspective, you can test how your login page works. In the example of a login page, visually, you can see that when you attempt to login with a correct password and a properly working server and API that you give you back accurate responses and a working frontend that can parse that API response and allow you access into the application when the username and password is correct. It's really easy to see that, when you look at it, visually. And if you have thorough user stories, you can write tests based directly on those user stories.
 
-            <!--TESTING STRATEGIES -- VRT -->
-            <section data-markdown>
-                <script type="text/template">
-                    ### Testing Strategies:
+            We know that when the username and password is correct and working properly that the user should be redirected to their homepage. If the user's email or password is incorrect, an error should occur and should be displayed, if your server is down, an error should occur. If any of the pieces are failing, you'll immediately know if by looking at your visual tests. So now the biggest concern is being able to mimic and test different states of your application from a single viewpoint.
+          </script>
+        </section>
 
-                    ### Visual Regression Tests
-
-                    Notes:
-                    So the way that I like to approach testing is that the first type of that I like to write is called a visual regression test. Now regression testing, the definition depends on who you ask and how they're going to define it. A lot of times regression testing specifically refers to a bug that is introduced then you write a test that makes sure that that specific bug isn't introduced again. But I like to think of regression testing as a bit more proactive instead of reactive -- so regression tests are written to ensure that existing functionality that you have remains stable even as you're adding new features or refactoring code.
-
-                    When you think about approaching your application from the end user's perspective, you can test how your login page works. In the example of a login page, visually, you can see that when you attempt to login with a correct password and a properly working server and API that you give you back accurate responses and a working frontend that can parse that API response and allow you access into the application when the username and password is correct. It's really easy to see that, when you look at it, visually. And if you have thorough user stories, you can write tests based directly on those user stories.
-
-                    We know that when the username and password is correct and working properly that the user should be redirected to their homepage. If the user's email or password is incorrect, an error should occur and should be displayed, if your server is down, an error should occur. If any of the pieces are failing, you'll immediately know if by looking at your visual tests. So now the biggest concern is being able to mimic and test different states of your application from a single viewpoint.
-                </script>
-            </section>
-
-            <!--
+        <!--
                 * ANATOMY OF A TEST (3 minutes, 9 total)
                     * Ingredients:
                         * Test environment (e.g., Mocha, Jasmine, Jest, Karma)
@@ -431,135 +441,175 @@
                         * Generate and compare screenshots to make sure changes from previous runs are intended
                         * Generate code coverage reports
             -->
-            <!-- ANATOMY OF A TEST -- INGREDIENTS-->
-            <section data-markdown>
-                <script type="text/template">
-                    ## ANATOMY OF A TEST
-                    ### Ingredients
+        <!-- ANATOMY OF A TEST -- INGREDIENTS-->
+        <section data-markdown>
+          <script type="text/template">
+            ## ANATOMY OF A TEST
+            ### Ingredients
 
-                    * Test environment <!-- .element: class="fragment" data-fragment-index="1" -->
-                    * Testing structure <!-- .element: class="fragment" data-fragment-index="2" -->
-                    * Assertions <!-- .element: class="fragment" data-fragment-index="3" -->
-                    * Mocks, spies, and stubs <!-- .element: class="fragment" data-fragment-index="4" -->
-                    * Browser or browser-like environment <!-- .element: class="fragment" data-fragment-index="5" -->
+            * Test environment <!-- .element: class="fragment" data-fragment-index="1" -->
+            * Testing structure <!-- .element: class="fragment" data-fragment-index="2" -->
+            * Assertions <!-- .element: class="fragment" data-fragment-index="3" -->
+            * Mocks, spies, and stubs <!-- .element: class="fragment" data-fragment-index="4" -->
+            * Browser or browser-like environment (optional) <!-- .element: class="fragment" data-fragment-index="5" -->
 
-                    Notes:
+            Notes:
 
-                    * Test environment (e.g., Mocha, Jasmine, Jest, Karma)
-                    * Testing structure (e.g., Mocha, Jasmine, Jest, Cucumber)
-                    * Assertions (e.g., Chai, Jasmine, Jest, Unexpected)
-                    * Mocks, spies, and stubs (e.g., Sinon, Jasmine, enzyme, Jest, testdouble)
-                    * Browser or browser-like environment (e.g., Protractor, Nightwatch, Phantom, Casper)
-                </script>
-            </section>
+            * Test environment (e.g., Mocha, Jasmine, Jest, Karma)
+            * Testing structure (e.g., Mocha, Jasmine, Jest, Cucumber)
+            * Assertions (e.g., Chai, Jasmine, Jest, Unexpected)
+            * Mocks, spies, and stubs (e.g., Sinon, Jasmine, enzyme, Jest, testdouble)
+            * Browser or browser-like environment (e.g., Protractor, Nightwatch, Phantom, Casper)
+          </script>
+        </section>
 
-            <!-- ANATOMY OF A TEST -- PROCESS-->
-            <section data-markdown>
-                <script type="text/template">
-                    ## ANATOMY OF A TEST
-                    ### Process
+        <!-- ANATOMY OF A TEST -- PROCESS-->
+        <section data-markdown>
+          <script type="text/template">
+            ## ANATOMY OF A TEST
+            ### Process
 
-                    * Generate, display, and watch test results<!-- .element: class="fragment" data-fragment-index="1" -->
-                    * Compare and check assertions<!-- .element: class="fragment" data-fragment-index="2" -->
-                    * Generate code coverage reports<!-- .element: class="fragment" data-fragment-index="3" -->
+            * Generate, display, and watch test results<!-- .element: class="fragment" data-fragment-index="1" -->
+            * Compare and check assertions<!-- .element: class="fragment" data-fragment-index="2" -->
+            * Generate code coverage reports<!-- .element: class="fragment" data-fragment-index="3" -->
 
-                    Notes:
+            Notes:
 
-                    * Generate, display, and watch test results
-                    * Compare and check assertions
-                    * Generate code coverage reports
-                </script>
-            </section>
+            * Generate, display, and watch test results
+            * Compare and check assertions
+            * Generate code coverage reports
+          </script>
+        </section>
 
-            <!--
+        <!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
+
+        <!-- WALKTHROUGH INTRODUCTION -->
+        <section data-markdown>
+          <script type="text/template">
+            #### Walkthrough Introduction
+            This workshop is for YOU
+
+            Do what works best for how you learn!
+
+            Notes:
+            I'm going to walk through the code and (hopefully) live code out the solutions.
+
+            We'll then have a period where you can dive in on your own. This is your time to do what
+            helps you learn - whether that's coding out the solutions on your own, diving into additional
+            examples or things you're interested in, checking out the commits along the way and seeing
+            each step run on your machine, etc. I'll be here for any questions along the way!
+          </script>
+        </section>
+
+        <!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
+
+        <!-- DJANGO WALKTHROUGH -->
+        <section data-markdown>
+          <script type="text/template">
+            ## Django Walkthrough
+          </script>
+        </section>
+
+        <!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
+
+        <!-- BREAK -->
+        <section data-markdown>
+          <script type="text/template">
+            ## BREAK - Return at 3:30PM
+
+            - Set up for Phase 2 if you need it
+          </script>
+        </section>
+
+        <!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
+
+        <!--
                 * APPROACHES FOR VISUAL REGRESSION TESTING (2 minutes, 14 total)
                     * Developers maintain a set of “golden” images, whether screenshots or mocks, that represent what the application *should* look like
                     * Tests are run that take screenshots of the current application and compare them against the “golden” set
                     * Results can be received as either discrete pixel amounts or an overlay of screenshots with highlighted areas where they differ
             -->
-            <!-- APPROACHES FOR VISUAL REGRESSION TESTING -->
-            <section data-markdown>
-                <script type="text/template">
-                    ## APPROACHES FOR VISUAL REGRESSION TESTING
+        <!-- APPROACHES FOR VISUAL REGRESSION TESTING -->
+        <section data-markdown>
+          <script type="text/template">
+            ## APPROACHES FOR VISUAL REGRESSION TESTING
 
-                    * Screenshots and "Golden Images"<!-- .element: class="fragment" data-fragment-index="1" -->
-                    * An image diff-ing library<!-- .element: class="fragment" data-fragment-index="2" -->
+            * Screenshots and "Golden Images"<!-- .element: class="fragment" data-fragment-index="1" -->
+            * An image diff-ing library<!-- .element: class="fragment" data-fragment-index="2" -->
 
-                    Notes: Generally, visual regression tests follow the same patterns as most other testing. They're similar to snapshot testing, but they just sprinkle in a few things:
+            Notes: Generally, visual regression tests follow the same patterns as most other testing. They're similar to snapshot testing, but they just sprinkle in a few things:
 
-                    * Screenshots and "Golden Images"
-                    * An image diff-ing library
+            * Screenshots and "Golden Images"
+            * An image diff-ing library
 
-                    You can then generate and compare full screenshots to make sure changes from previous runs are intended
-                </script>
-            </section>
+            You can then generate and compare full screenshots to make sure changes from previous runs are intended
+          </script>
+        </section>
 
-
-            <!--
+        <!--
                 * VISUAL REGRESSION TESTING IS EASIER IN 2018 (1 minute, 15 total)
                     * Previously, visual regression testing was tied to manipulating an actual browser using tools like Selenium or PhantomJS
                     * [Headless Chrome](https://developers.google.com/web/updates/2017/04/headless-chrome) makes interacting with your browser much easier since you can control test environments without a visible UI
             -->
-            <!-- VISUAL REGRESSION TESTING IS EASIER IN 2018 -->
-            <section data-markdown>
-                <script type="text/template">
-                        ## Headless Browsers
+        <!-- VISUAL REGRESSION TESTING IS EASIER IN 2018 -->
+        <section data-markdown>
+          <script type="text/template">
+            ## Headless Browsers
 
-                        ![headless-nearlyheadlessnick](img/gifs/headless-nearlyheadlessnick.gif "Nearly-Headless Nick")
+            ![headless-nearlyheadlessnick](img/gifs/headless-nearlyheadlessnick.gif "Nearly-Headless Nick")
 
-                        Notes:
+            Notes:
 
-                        Running visual regression tests relies on having a browser or browser-like environment. Previously, visual regression testing was tied to manipulating an actual browser using tools like Selenium or PhantomJS. Tools like Selenium have been notoriously difficult to work with, especially when trying to introspect or debug issues.
+            Running visual regression tests relies on having a browser or browser-like environment. Previously, visual regression testing was tied to manipulating an actual browser using tools like Selenium or PhantomJS. Tools like Selenium have been notoriously difficult to work with, especially when trying to introspect or debug issues.
 
-                        [Headless Chrome](https://developers.google.com/web/updates/2017/04/headless-chrome) makes interacting with your browser much easier since you can control test environments without a visible UI
-                    </script>
-            </section>
-            <!-- VISUAL REGRESSION TESTING IS EASIER IN 2018 -->
-            <section data-markdown>
-                <script type="text/template">
-                    ### VISUAL REGRESSION TESTING IS EASIER IN 2018
+            [Headless Chrome](https://developers.google.com/web/updates/2017/04/headless-chrome) makes interacting with your browser much easier since you can control test environments without a visible UI
+          </script>
+        </section>
+        <!-- VISUAL REGRESSION TESTING IS EASIER IN 2018 -->
+        <section data-markdown>
+          <script type="text/template">
+            ### VISUAL REGRESSION TESTING IS EASIER IN 2018
 
-                    ![puppeteer-logo](img/gifs/puppeteer.png "Puppeteer")
+            ![puppeteer-logo](img/gifs/puppeteer.png "Puppeteer")
 
-                    Notes:
-                    Puppeteer is a library that makes interacting with Headless Chrome painless. It also makes it much easier to debug and introspect your code.
-                </script>
-            </section>
+            Notes:
+            Puppeteer is a library that makes interacting with Headless Chrome painless. It also makes it much easier to debug and introspect your code.
+          </script>
+        </section>
 
-
-            <!--
+        <!--
                 * WALK-THROUGH - TOOLS FOR VISUAL REGRESSION TESTING  (2 minutes, 17 total)
                     * [Puppeteer](https://github.com/GoogleChrome/puppeteer) - Headless Chrome Node API
                     * [Resemble.js](https://github.com/Huddle/Resemble.js) - Visual image comparison
                     * Runner and assertion libraries of choice - we’ll use Mocha and Chai
             -->
-            <!-- WALK-THROUGH -- HEADING -->
-            <section data-markdown>
-                <script type="text/template">
-                    ## VRT WALK-THROUGH
+        <!-- WALK-THROUGH -- HEADING -->
+        <section data-markdown>
+          <script type="text/template">
+            ## VRT WALK-THROUGH
 
-                    ![imready-jonsnow](img/gifs/imready-jonsnow.gif "I'm Ready.")
+            ![imready-jonsnow](img/gifs/imready-jonsnow.gif "I'm Ready.")
 
-                    Notes:
-                    Let's walk-through an example of how you can implement visual regression testing.
-                </script>
-            </section>
-            <!-- WALK-THROUGH -- TOOLS FOR VISUAL REGRESSION TESTING -->
-            <section data-markdown>
-                <script type="text/template">
-                    ## VRT WALK-THROUGH
-                    ### TOOLS OF CHOICE
+            Notes:
+            Let's walk-through an example of how you can implement visual regression testing.
+          </script>
+        </section>
+        <!-- WALK-THROUGH -- TOOLS FOR VISUAL REGRESSION TESTING -->
+        <section data-markdown>
+          <script type="text/template">
+            ## VRT WALK-THROUGH
+            ### TOOLS OF CHOICE
 
-                    * [Puppeteer](https://github.com/GoogleChrome/puppeteer) - Headless Chrome Node API
-                    * [Resemble.js](https://github.com/Huddle/Resemble.js) - Visual image comparison
-                    * Runner and assertion libraries of choice - we’ll use Jest and Enzyme
+            * [Puppeteer](https://github.com/GoogleChrome/puppeteer) - Headless Chrome Node API
+            * [Resemble.js](https://github.com/Huddle/Resemble.js) - Visual image comparison
+            * Runner and assertion libraries of choice - we’ll use Jest and Enzyme
 
-                    Notes:
-                    My personal tools of choice:
-                </script>
-            </section>
+            Notes:
+            My personal tools of choice:
+          </script>
+        </section>
 
-            <!--
+        <!--
                 * WALK-THROUGH WITH CODE SNIPPETS (this will have a companion repo on GitHub)  (8 minutes, 25 total)
                     * Set up your test environment:
                         * `before` - start your local server, make sure your directories to store screenshots exists
@@ -575,149 +625,256 @@
                             * Screenshot of DinosaurJS site with elements moved: ![screenshot of DinosaurJS site with elements moved](https://s3.amazonaws.com/dinojs/dinosaurjs.org_changed.png)
                             * Image showing diff between screenshots: ![image showing diff between screenshots](https://s3.amazonaws.com/dinojs/dinosaurjs.org_diff.png)
             -->
-            <!-- WALK-THROUGH -- INSTALLATION -->
-            <section data-markdown>
-                <script type="text/template">
-                    ## Install dependencies
+        <!-- WALK-THROUGH -- INSTALLATION -->
+        <section data-markdown>
+          <script type="text/template">
+            ## Install dependencies
 
-                    ```shell
-                    npm install --dev jest enzyme puppeteer resemblejs
-                    ```
+            ```shell
+            npm install --dev jest enzyme puppeteer resemblejs
+            ```
 
-                    Notes:
-                    We'll get started by installing dependencies. This is in no way exhaustive, definitely check out the full example code, but these are our key players.
-                </script>
-            </section>
-            <!-- WALK-THROUGH -- Directories -->
-            <section data-markdown>
-                <script type="text/template">
-                    ### Create Directories
+            Notes:
+            We'll get started by installing dependencies. This is in no way exhaustive, definitely check out the full example code, but these are our key players.
+          </script>
+        </section>
+        <!-- WALK-THROUGH -- Directories -->
+        <section data-markdown>
+          <script type="text/template">
+            ### Create Directories
 
-                    ```javascript
-                    beforeAll(async () => {
-                      if (!fs.existsSync(goldenDir))
-                        fs.mkdirSync(goldenDir)
-                      if (!fs.existsSync(screenshotDir))
-                        fs.mkdirSync(screenshotDir)
-                      if (!fs.existsSync(diffsDir))
-                        fs.mkdirSync(diffsDir)
-                    })
-                    ```
+            ```javascript
+            beforeAll(async () => {
+              if (!fs.existsSync(goldenDir))
+                fs.mkdirSync(goldenDir)
+              if (!fs.existsSync(screenshotDir))
+                fs.mkdirSync(screenshotDir)
+              if (!fs.existsSync(diffsDir))
+                fs.mkdirSync(diffsDir)
+            })
+            ```
 
-                    Notes:
-                    So the first thing you'll want to do is create the directories that you're going to store your "golden" screenshots or your initial mockups in, and your test directory where you're going to store all of your screenshots.
+            Notes:
+            So the first thing you'll want to do is create the directories that you're going to store your "golden" screenshots or your initial mockups in, and your test directory where you're going to store all of your screenshots.
 
-                    So before all of your tests, you're going to want to check that those directories exist.
+            So before all of your tests, you're going to want to check that those directories exist.
 
-                    Side-note -- I'm not an advocate for "pixel-perfect" mockup matching -- I believe that you should let your style frameworks do their thing if things line up slightly differently when they're implemented, but I do think you should check for things like typography and consistent alignment.
-                </script>
-            </section>
+            Side-note -- I'm not an advocate for "pixel-perfect" mockup matching -- I believe that you should let your style frameworks do their thing if things line up slightly differently when they're implemented, but I do think you should check for things like typography and consistent alignment.
+          </script>
+        </section>
 
-            <!-- WALK-THROUGH -- Browser -->
-            <section data-markdown>
-                <script type="text/template">
-                    ### Set Up Your Browser Environment
+        <!-- WALK-THROUGH -- Browser -->
+        <section data-markdown>
+          <script type="text/template">
+            ### Set Up Your Browser Environment
 
-                    ```javascript
-                    beforeEach(async () => {
-                      browser = await puppeteer.launch()
-                      page = await browser.newPage()
-                    })
-                    ```
+            ```javascript
+            beforeEach(async () => {
+              browser = await puppeteer.launch()
+              page = await browser.newPage()
+            })
+            ```
 
-                    Notes:
-                    Then before each of your tests, you'll want to give yourself a fresh browser and a fresh page using Puppeteer, so all you have to do is call `puppeteer.launch` to get your browser and `browser.newPage` to get your page.
-                </script>
-            </section>
+            Notes:
+            Then before each of your tests, you'll want to give yourself a fresh browser and a fresh page using Puppeteer, so all you have to do is call `puppeteer.launch` to get your browser and `browser.newPage` to get your page.
+          </script>
+        </section>
 
-            <!-- WALK-THROUGH -- Screenshot -->
-            <section data-markdown>
-                <script type="text/template">
-                    ### Take your screenshot
+        <!-- WALK-THROUGH -- Screenshot -->
+        <section data-markdown>
+          <script type="text/template">
+            ### Take your screenshot
 
-                    ```javascript
-                    async function takeAndCompareScreenshot(page, route) {
-                      const fileName = `${screenSize}/${route || 'index'}`
+            ```javascript
+            async function takeAndCompareScreenshot(page, route) {
+              const fileName = `${screenSize}/${route || 'index'}`
 
-                       await page.goto(`http://localhost:8888/${route}`)
-                       await page.screenshot({ path: `${screenshotDir}/${fileName}.png` })
+               await page.goto(`http://localhost:8888/${route}`)
+               await page.screenshot({ path: `${screenshotDir}/${fileName}.png` })
 
-                       return compareScreenshot(fileName)
-                    }
-                    ```
+               return compareScreenshot(fileName)
+            }
+            ```
 
-                    Notes:
-                    First what we'll do is navigate to the route that we want to test and take a screenshot of the page. This is just the helper function that we call -- it's made so that we can pass it a route to make it easier to have a list of pages we want to test. You can also handle clicks and different UI states using Puppeteer, they make it super easy.
-                </script>
-            </section>
+            Notes:
+            First what we'll do is navigate to the route that we want to test and take a screenshot of the page. This is just the helper function that we call -- it's made so that we can pass it a route to make it easier to have a list of pages we want to test. You can also handle clicks and different UI states using Puppeteer, they make it super easy.
+          </script>
+        </section>
 
-            <!-- WALK-THROUGH -- Compare -->
-            <section data-markdown
-                data-transition="none">
-                <script type="text/template">
-                    ### Compare Images
+        <!-- WALK-THROUGH -- Compare -->
+        <section data-markdown data-transition="none">
+          <script type="text/template">
+            ### Compare Images
 
-                    ```javascript
-                    async function processScreenshot(fileName) {
-                      const [image1, image2] = await Promise.all([
-                        readImage(`${testDir}/${fileName}.png`),
-                        readImage(`${goldenDir}/${fileName}.png`),
-                      ])
+            ```javascript
+            async function processScreenshot(fileName) {
+              const [image1, image2] = await Promise.all([
+                readImage(`${testDir}/${fileName}.png`),
+                readImage(`${goldenDir}/${fileName}.png`),
+              ])
 
-                      compare(image1, image2, {}, data => {
-                        /* data:
-                          {
-                            misMatchPercentage : 100, // %
-                            isSameDimensions: true, // or false
-                            dimensionDifference: { width: 0, height: -1 }, // defined if dimensions are not the same
-                            getImageDataUrl: function(){}
-                          }
-                        */
-                        await fs.writeFile(`${diffDir}/${fileName}.png`, data.getBuffer())
-                        expect(data.misMatchPercentage).toBe(100)
-                      })
-                    }
-                    ```
+              compare(image1, image2, {}, data => {
+                /* data:
+                  {
+                    misMatchPercentage : 100, // %
+                    isSameDimensions: true, // or false
+                    dimensionDifference: { width: 0, height: -1 }, // defined if dimensions are not the same
+                    getImageDataUrl: function(){}
+                  }
+                */
+                await fs.writeFile(`${diffDir}/${fileName}.png`, data.getBuffer())
+                expect(data.misMatchPercentage).toBe(100)
+              })
+            }
+            ```
 
-                    Notes:
-                    Once you have that screenshot, you'll want to compare it to your golden screenshot.
+            Notes:
+            Once you have that screenshot, you'll want to compare it to your golden screenshot.
 
-                    #XXX explain
+            #XXX explain
 
-                    I also like to write the diffed image to disk so it can be reviewed later.
-                </script>
-            </section>
+            I also like to write the diffed image to disk so it can be reviewed later.
+          </script>
+        </section>
 
-            <!-- WALK-THROUGH -- Screenshots -->
-            <section data-markdown
-                data-transition="none">
-                <script type="text/template">
-                        ### Outcome
+        <!-- WALK-THROUGH -- Screenshots -->
+        <section data-markdown data-transition="none">
+          <script type="text/template">
+            ### Outcome
 
-                        ![reactapp-image-comparison](img/gifs/reactapp-golden.png "Diff Comparison") <!-- .element: class="fragment screenshot" data-fragment-index="1" -->
-                        ![reactapp-image-comparison](img/gifs/reactapp-testing.png "Diff Comparison") <!-- .element: class="fragment screenshot" data-fragment-index="2" -->
+            ![reactapp-image-comparison](img/gifs/reactapp-golden.png "Diff Comparison") <!-- .element: class="fragment screenshot" data-fragment-index="1" -->
+            ![reactapp-image-comparison](img/gifs/reactapp-testing.png "Diff Comparison") <!-- .element: class="fragment screenshot" data-fragment-index="2" -->
 
-                        Notes:
-                        #XXX
-                    </script>
-            </section>
+            Notes:
+            #XXX
+          </script>
+        </section>
 
-            <!-- WALK-THROUGH -- Outcome -->
-            <section data-markdown
-                data-transition="none">
-                <script type="text/template">
-                        ### Outcome
+        <!-- WALK-THROUGH -- Outcome -->
+        <section data-markdown data-transition="none">
+          <script type="text/template">
+            ### Outcome
 
-                        ![reactapp-image-comparison](img/gifs/reactapp-diff.png "Diff Comparison") <!-- .element: class="screenshot" -->
+            ![reactapp-image-comparison](img/gifs/reactapp-diff.png "Diff Comparison") <!-- .element: class="screenshot" -->
 
-                        Notes:
-                        #XXX
-                        Switch over to show other options
-                    </script>
-            </section>
+            Notes:
+            #XXX
+            Switch over to show other options
+          </script>
+        </section>
 
+        <!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
 
-            <!--
+        <!-- VISUAL TESTING WALKTHROUGH -->
+        <section data-markdown>
+          <script type="text/template">
+            ## Visual Testing Walkthrough
+          </script>
+        </section>
+
+        <!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
+
+        <!-- WALK-THROUGH -- Actions -->
+        <section data-markdown data-transition="none">
+          <script type="text/template">
+            ### Navigating a Page - Selectors
+
+            ```css
+            /* element */
+            button { }
+
+            /* class */
+            .custom-class {}
+
+            /* id */
+            #unique-id {}
+            ```
+
+            ###### https://www.htmldog.com/references/css/selectors/
+
+            Notes:
+          </script>
+        </section>
+
+        <!-- WALK-THROUGH -- Actions -->
+        <section data-markdown data-transition="none">
+          <script type="text/template">
+            ### Navigating a Page - Actions/Events
+
+            ```javascript
+            // Click a button
+            await page.click('#unique-button-id');
+
+            // Focus on the input field
+            await page.focus('#unique-input-id');
+
+            // Enter some text into the input field
+            await page.type("Hello PyCon");
+
+            // Press Enter to perform an action
+            await page.keyboard.press('Enter');
+            ```
+
+            Notes:
+          </script>
+        </section>
+
+        <!-- WALK-THROUGH -- Best Practices for Targeting -->
+        <section data-markdown data-transition="none">
+          <script type="text/template">
+            ### Best Practices for Targeting
+
+            Long selectors are not great!
+
+            ```javascript
+            await page.click('div > .container > #login-modal > .form > button#signup');
+            ```
+
+            Notes:
+            - If you've worked with CSS before, you probably have learned things like super nested
+            selectors are not great, targeting styles per ID probably doesn't scale well, using
+            !important on everything is bad juju.
+
+            - Long selectors, especially in tests, put you at risk of having the structure of your
+            page/DOM change without any actual meaning coming from it. Your DOM could change and your
+            page could still look exactly the same (say you removed some unnecessary divs).
+          </script>
+        </section>
+
+        <!-- WALK-THROUGH -- Best Practices for Targeting -->
+        <section data-markdown data-transition="none">
+          <script type="text/template">
+            ### Best Practices for Targeting
+
+            IDs are ideal.
+
+            ```javascript
+            await page.click('#signup-button');
+            ```
+
+            Notes:
+            - IDs really are the best way to target items in your tests. It's best to set up a set of
+            rules for your naming conventions and expectations for which items should have IDs.
+            - E.g. every div probably does not need an ID, but perhaps every button or input element
+            should
+          </script>
+        </section>
+
+        <!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
+
+        <!-- LIVE CODE WALKTHROUGH -->
+        <section data-markdown>
+          <script type="text/template">
+            ## Selectors Live Code??
+
+            Notes:
+            https://github.com/GoogleChrome/puppeteer/blob/v1.1.1/docs/api.md#pageclickselector-options
+          </script>
+        </section>
+
+        <!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
+
+        <!--
                 * WHAT SHOULD YOU EXPECT? (3 minutes, 12 total)
                     * Good tests mimic good bug reports:
                         * What were you testing?
@@ -725,71 +882,93 @@
                         * What was the output (actual behavior)?
                         * What was the expected output (expected behavior)?
             -->
-            <!-- WHAT SHOULD YOU EXPECT? -->
-            <section data-markdown>
-                <script type="text/template">
-                    ## WHAT SHOULD YOU `EXPECT`?
+        <!-- WHAT SHOULD YOU EXPECT? -->
+        <section data-markdown>
+          <script type="text/template">
+            ## WHAT SHOULD YOU `EXPECT`?
 
-                    * Start from user stories <!-- .element: class="fragment" data-fragment-index="1" -->
-                    * Critical business logic <!-- .element: class="fragment" data-fragment-index="2" -->
-                    * Sitemap <!-- .element: class="fragment" data-fragment-index="3" -->
+            * Start from user stories <!-- .element: class="fragment" data-fragment-index="1" -->
+            * Critical business logic <!-- .element: class="fragment" data-fragment-index="2" -->
+            * Sitemap <!-- .element: class="fragment" data-fragment-index="3" -->
 
-                    Notes:
-                    So: what should you expect? (You knew that was coming)
+            Notes:
+            So: what should you expect? (You knew that was coming)
 
-                    If you have user stories, they’re a good place to start. I mentioned them earlier, but if you have well defined user stories, which are lists of requirements as seen from a user's perspective, then you can use those to guide your tests. Your critical points are what you should start with. What are the parts that completely run your user experience or product? If a user can’t authenticate, you’re pretty screwed. Sometimes the most complex parts are the hardest to test, but that means they’re also the most likely to break.
+            If you have user stories, they’re a good place to start. I mentioned them earlier, but if you have well defined user stories, which are lists of requirements as seen from a user's perspective, then you can use those to guide your tests. Your critical points are what you should start with. What are the parts that completely run your user experience or product? If a user can’t authenticate, you’re pretty screwed. Sometimes the most complex parts are the hardest to test, but that means they’re also the most likely to break.
 
-                    If you don’t have user stories, try generating a sitemap and picking out the parts you want to start with.
+            If you don’t have user stories, try generating a sitemap and picking out the parts you want to start with.
 
-                    Also, run your front end tests without your API server running. How does your client handle errors? How do your pages responded if they require authentication but can’t validate the token? What happens if you invalidate a token, or use an expired token?
-                </script>
-            </section>
+            Also, run your front end tests without your API server running. How does your client handle errors? How do your pages responded if they require authentication but can’t validate the token? What happens if you invalidate a token, or use an expired token?
+          </script>
+        </section>
 
+        <!-- CONCLUSION -- NEXT STEPS! -->
+        <section data-markdown class="small-list">
+          <script type="text/template">
+              #### Next Steps
 
-            <!--
+            - CI Integration
+              - Snapshots: Percy (https://percy.io)
+              - Roll your own
+
+            Notes:
+            - Explain CI
+            - Not aware of any tools for Screenshot testing, but Percy!
+            - Roll your own - CI runs tests as you normally would, you need a way to approve/replace
+            goldens
+            - I'm a fan of AWS - feel free to come talk to be about vendor-specific questions
+          </script>
+        </section>
+
+        <!--
                 * CONCLUSION (1 minute, 26 total)
                     * Wrap up and call to action
             -->
-            <!-- CONCLUSION -- THANK YOU! -->
-            <section data-markdown
-                class="small-list">
-                <script type="text/template">
-                    ![thank-you](img/gifs/thank-you-michael-scott.gif "Thank you!")
+        <!-- CONCLUSION -- THANK YOU! -->
+        <section data-markdown class="small-list">
+          <script type="text/template">
+            ![thank-you](img/gifs/thank-you-michael-scott.gif "Thank you!")
 
-                    - Talk is hosted at: [emilyemorehouse.github.io/what-to-expect-when-youre-expecting](emilyemorehouse.github.io/what-to-expect-when-youre-expecting)
-                    - Talk source code and example code are at: [github.com/emilyemorehouse/what-to-expect-when-youre-expecting](github.com/emilyemorehouse/what-to-expect-when-youre-expecting)
+            - Talk is hosted at: [emilyemorehouse.github.io/what-to-expect-when-youre-expecting](emilyemorehouse.github.io/what-to-expect-when-youre-expecting)
+            - Talk source code and example code are at: [github.com/emilyemorehouse/what-to-expect-when-youre-expecting](github.com/emilyemorehouse/what-to-expect-when-youre-expecting)
+            - Reach out to me via email or Twitter
 
-                    Notes:
-                    Go forth and test things!
-                </script>
-            </section>
-        </div>
+            Notes:
+            Go forth and test things!
+          </script>
+        </section>
+      </div>
 
-        <footer>
-            What To Expect When You're Expecting // @emilyemorehouse
-        </footer>
+      <footer>
+        What To Expect When You're Expecting // @emilyemorehouse
+      </footer>
     </div>
 
     <script src="lib/js/head.min.js"></script>
     <script src="js/reveal.js"></script>
 
     <script>
-        // More info about config & dependencies:
-        // - https://github.com/hakimel/reveal.js#configuration
-        // - https://github.com/hakimel/reveal.js#dependencies
-        Reveal.initialize({
-            dependencies: [
-                { src: 'plugin/markdown/marked.js' },
-                { src: 'plugin/markdown/markdown.js' },
-                { src: 'plugin/notes/notes.js', async: true },
-                { src: 'plugin/highlight/highlight.js', async: true, callback: function () { hljs.initHighlightingOnLoad(); } }
-            ],
-            // controlsLayout: 'edges', // default - bottom-right
-            controlsBackArrows: 'visible', // default - faded
-            history: true,
-            overview: false,
-        });
+      // More info about config & dependencies:
+      // - https://github.com/hakimel/reveal.js#configuration
+      // - https://github.com/hakimel/reveal.js#dependencies
+      Reveal.initialize({
+        dependencies: [
+          { src: "plugin/markdown/marked.js" },
+          { src: "plugin/markdown/markdown.js" },
+          { src: "plugin/notes/notes.js", async: true },
+          {
+            src: "plugin/highlight/highlight.js",
+            async: true,
+            callback: function() {
+              hljs.initHighlightingOnLoad();
+            }
+          }
+        ],
+        // controlsLayout: 'edges', // default - bottom-right
+        controlsBackArrows: "visible", // default - faded
+        history: true,
+        overview: false
+      });
     </script>
-</body>
-
+  </body>
 </html>
